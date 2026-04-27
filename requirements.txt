@@ -1,48 +1,50 @@
-
-# ── ML Service (Dev 2) ─────────────────────────────────────────
-# API
+# ── API (Common: Dev1 + Dev2) ─────────────────────────────────────────
 fastapi==0.111.0
-uvicorn==0.29.0
+uvicorn==0.30.1          # Dev2 (latest, replaces Dev1 0.29.0)
 
-# Data & ML
+# ── Data & ML (Dev1) ──────────────────────────────────────────────────
 pandas==2.2.2
 numpy==1.26.4
 scikit-learn==1.4.2
-joblib==1.4.2          # saving/loading .pkl model
+joblib==1.4.2            # saving/loading .pkl model
 
-# Data validation (matches Dev 1's FastAPI setup)
+# ── Database (Dev2) ───────────────────────────────────────────────────
+sqlalchemy==2.0.30
+psycopg2-binary==2.9.9
+greenlet==3.0.3          # REQUIRED by SQLAlchemy (prevents runtime issues)
+
+# ── Data Validation & Settings (Common + Dev2 extra) ──────────────────
 pydantic==2.7.1
+pydantic-settings==2.3.1   # Dev2
 
-# Dev / testing
+# ── Dev / Testing (Dev1) ──────────────────────────────────────────────
 pytest==8.2.0
-httpx==0.27.0          # for testing FastAPI endpoints
+httpx==0.27.0              # API testing + async support
 
-# Utilities
+# ── Utilities (Common) ────────────────────────────────────────────────
 python-dotenv==1.0.1
 
-# Core HTTP + parsing
+# ── Core HTTP + Parsing (Dev1) ────────────────────────────────────────
 requests==2.31.0
 beautifulsoup4==4.12.3
 
-# Network scanning
+# ── Network Scanning (Dev1) ───────────────────────────────────────────
 python-nmap==0.7.1
 
-# SSL / security (standard lib used, but keep for compatibility)
+# ── SSL / Security (Dev1) ─────────────────────────────────────────────
 pyOpenSSL==24.0.0
 
-# Reporting
-reportlab==4.0.9
+# ── Reporting (Common, Dev2 version preferred) ────────────────────────
+reportlab==4.2.0
 
-# Logging
+# ── Logging (Dev1) ───────────────────────────────────────────────────
 loguru==0.7.2
 
-# Testing
-pytest==8.2.0
+# ── Type Hints / Dev Support (Dev2 preferred) ─────────────────────────
+typing-extensions>=4.14.1
 
-# Optional (recommended for future async scaling)
-httpx==0.27.0
-
-# Type hints / dev support (optional but good practice)
-typing-extensions==4.11.0
+# ── Networking Compatibility (Dev1) ───────────────────────────────────
 urllib3==1.26.18
 
+# ── Async Core (Stability for FastAPI ecosystem) ──────────────────────
+anyio==4.4.0              # prevents async-related compatibility issues
