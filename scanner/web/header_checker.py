@@ -23,6 +23,8 @@ class HeaderChecker(BaseScanner):
         for header in required_headers:
             if header not in headers:
                 findings.append({
+                    "scanner": "Web Scanner",
+                    "stage": "Web Vulnerability Scan",
                     "type": "Security Misconfiguration",
                     "endpoint": self.target,
                     "payload": "N/A",

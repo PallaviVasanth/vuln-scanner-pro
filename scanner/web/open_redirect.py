@@ -21,6 +21,8 @@ class OpenRedirectScanner(BaseScanner):
 
             if "evil.com" in response["text"]:
                 findings.append({
+                    "scanner": "Web Scanner",
+                    "stage": "Web Vulnerability Scan",
                     "type": "Open Redirect",
                     "endpoint": self.target,
                     "payload": payload,

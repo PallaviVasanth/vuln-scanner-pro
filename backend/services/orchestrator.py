@@ -1,10 +1,15 @@
+import sys
+import os
+
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
+sys.path.append(BASE_DIR)
+
 import threading
 import logging
-import os
-from backend.config import settings
-from backend.db.database import SessionLocal
-from backend.db import crud
-from backend.services.risk_engine import compute_risk_scores
+from config import settings
+from db.database import SessionLocal
+from db import crud
+from services.risk_engine import compute_risk_scores
 
 logger = logging.getLogger(__name__)
 
@@ -31,9 +36,19 @@ def _run_scan(scan_id: str, target: str, scan_type: str):
 
         scored_findings = compute_risk_scores(raw_findings)
 
-        for finding in scored_findings:
-            crud.create_vulnerability(db, scan_id=scan_id, **finding)
+        #Merging original + scored data
+        final_findings = []
+        for i in range(len(raw_findings)):
+            merged = {**raw_findings[i], **scored_findings[i]}
+            final_findings.append(merged)
 
+        for finding in final_findings:
+            # remove scanner before saving to DB
+            finding_copy = finding.copy()
+            finding_copy.pop("scanner", None)
+
+            crud.create_vulnerability(db, scan_id=scan_id, **finding_copy)
+        
         generate_report_for_scan(scan_id, db)
 
         crud.update_scan_status(db, scan_id, "completed")
@@ -55,53 +70,21 @@ def safe_run(func, *args, retries=2):
 
 
 def _execute_scanners(target: str, scan_type: str) -> list:
-    findings = []
-
-    # Web scan
     try:
-        from scanner.web.sql_injection import run_web_scan
-        findings.extend(safe_run(run_web_scan, target))  # ✅ ONLY THIS
-    except ImportError:
-        logger.warning("Web scanner module not implemented yet")
+        from scanner.scanner_manager import ScannerManager
+
+        manager = ScannerManager(target)
+        findings = manager.run()
+
+        return findings
+
     except Exception as e:
-        logger.warning(f"Web scanner error: {e}")
+        logger.error(f"Scanner execution failed: {e}")
+        return []
 
-    # Network scan
-    if scan_type in ("network", "full"):
-        try:
-            from scanner.network.port_scanner import run_network_scan
-            findings.extend(safe_run(run_network_scan, target))  # ✅ FIXED
-        except ImportError:
-            logger.warning("Network scanner module not implemented yet")
-        except Exception as e:
-            logger.warning(f"Network scanner error: {e}")
-
-    # AI module
-    try:
-        from ml_service.model import analyze_with_ai
-        findings.extend(safe_run(analyze_with_ai, findings))  # ✅ better
-    except ImportError:
-        logger.warning("AI module not implemented yet")
-    except Exception as e:
-        logger.warning(f"AI analyzer error: {e}")
-
-    # ✅ DEMO DATA (FIXED INDENTATION)
-    if not findings:
-        logger.info("No real findings, adding demo vulnerability")
-
-        findings.append({
-            "name": "SQL Injection",
-            "description": "User input not sanitized",
-            "severity": "high",
-            "evidence": "Detected test payload",
-            "recommendation": "Use parameterized queries",
-            "cvss_score": 8.5
-        })
-
-    return findings
 
 def generate_report_for_scan(scan_id: str, db):
-    from backend.db import crud
+    from db import crud
     from reportlab.lib.pagesizes import letter
     from reportlab.pdfgen import canvas
     import datetime
@@ -133,5 +116,16 @@ def generate_report_for_scan(scan_id: str, db):
         y -= 20
     c.save()
     logger.info(f"Report generated at {report_path}")
+    from db.database import SessionLocal
+    from db import crud
 
+    db = SessionLocal()
+
+    try:
+        scan = crud.get_scan_by_id(db, scan_id)
+        if scan:
+            scan.status = "completed"   # ✅ IMPORTANT
+            db.commit()
+    finally:
+        db.close()
 # This file is responsible for scan orchestration and report generation, used for managing scan lifecycle in background threads and coordinating scanner modules, and contains start_scan_task, _run_scan, _execute_scanners, and generate_report_for_scan functions.

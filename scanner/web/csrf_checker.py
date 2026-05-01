@@ -22,6 +22,8 @@ class CSRFChecker(BaseScanner):
 
             if not csrf_token_found:
                 findings.append({
+                    "scanner": "Web Scanner",
+                    "stage": "Web Vulnerability Scan",
                     "type": "CSRF",
                     "endpoint": self.target,
                     "payload": "N/A",
