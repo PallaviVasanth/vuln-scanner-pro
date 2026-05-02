@@ -14,10 +14,26 @@ class SSLChecker:
             with socket.create_connection((self.target, 443)) as sock:
                 with context.wrap_socket(sock, server_hostname=self.target) as ssock:
                     cert = ssock.getpeercert()
+                    if cert:
+                        findings.append({
+                            "scanner": "SSLChecker",
+                            "stage": "SSL Inspection",
+                            "type": "SSL Valid",
+                            "endpoint": self.target,
+                            "payload": "N/A",
+                            "method": "TLS",
+                            "evidence": "Valid SSL certificate",
+                            "status_code": 200,
+                            "response_time": 0,
+                            "error_detected": False,
+                            "payload_reflected": False
+                        })
 
                     # Basic validation
                     if not cert:
                         findings.append({
+                            "scanner": "Network Scanner",
+                            "stage": "SSL Inspection",
                             "type": "SSL Issue",
                             "endpoint": self.target,
                             "payload": "N/A",
@@ -31,6 +47,8 @@ class SSLChecker:
 
         except Exception as e:
             findings.append({
+                "scanner": "Network Scanner",
+                "stage": "SSL Inspection",
                 "type": "SSL Issue",
                 "endpoint": self.target,
                 "payload": "N/A",

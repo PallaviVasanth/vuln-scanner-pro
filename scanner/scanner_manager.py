@@ -10,8 +10,7 @@ from scanner.web.header_checker import HeaderChecker
 from scanner.network.port_scanner import PortScanner
 from scanner.network.ssl_checker import SSLChecker
 
-
-ML_API_URL = "http://localhost:8001/api/v1/ml/predict"
+ML_API_URL = "http://localhost:8001/ml/predict"
 
 
 class ScannerManager:
@@ -43,13 +42,17 @@ class ScannerManager:
                 results = scanner.scan()
 
                 for finding in results:
+                    finding["scanner"] = scanner.__class__.__name__
+                    finding["layer"] = "Web"
+
                     ml_data = self.call_ml(finding)
                     finding.update(ml_data)
 
                     all_findings.append(finding)
 
             except Exception as e:
-                print(f"Web scanner failed: {e}")
+                print(f"[Web] {scanner.__class__.__name__} failed: {e}")
+
 
         # ---- Run Network Scanners ----
         for scanner in network_scanners:
@@ -57,34 +60,39 @@ class ScannerManager:
                 results = scanner.scan()
 
                 for finding in results:
+                    finding["scanner"] = scanner.__class__.__name__
+                    finding["layer"] = "Network"
+
                     ml_data = self.call_ml(finding)
                     finding.update(ml_data)
 
                     all_findings.append(finding)
 
             except Exception as e:
-                print(f"Network scanner failed: {e}")
+                print(f"[Network] {scanner.__class__.__name__} failed: {e}")
+
+
         return all_findings
 
-    def call_ml(self, finding):
-        payload = {
+    def call_ml(self, finding: dict) -> dict:
+        ml_payload = {
             "features": {
-                "payload": finding["payload"],
-                "response_time": finding["response_time"],
-                "status_code": finding["status_code"],
-                "payload_reflected": finding["payload_reflected"],
-                "error_detected": finding["error_detected"],
-                "response_length_diff": len(finding["payload"])
+            "payload":              str(finding.get("payload", "N/A")),
+            "response_time":        int(finding.get("response_time", 0)),
+            "status_code":          int(finding.get("status_code", 200)),
+            "payload_reflected":    bool(finding.get("payload_reflected", False)),
+            "error_detected":       bool(finding.get("error_detected", False)),
+            "response_length_diff": len(str(finding.get("payload", ""))),
             }
         }
-
         try:
-            res = requests.post(ML_API_URL, json=payload, timeout=5)
+            res = requests.post(ML_API_URL, json=ml_payload, timeout=5)
+            res.raise_for_status()
             return res.json()
-
-        except Exception:
+        except Exception as e:
+            print(f"[ML] call failed: {e}")
             return {
-                "prediction": finding["type"],
-                "confidence": 0.5,
-                "is_vulnerable": True
+            "prediction":    finding.get("type", "Unknown"),
+            "confidence":    0.5,
+            "is_vulnerable": finding.get("is_vulnerable", False),
             }

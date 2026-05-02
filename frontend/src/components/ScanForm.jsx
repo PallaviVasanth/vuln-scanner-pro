@@ -6,27 +6,37 @@ const ScanForm = ({ setScanId }) => {
 
   const handleSubmit = async () => {
     try {
+      console.log("Starting scan...");
+
       const res = await startScan({
-        target,
+        target: target,
         scan_type: "full",
       });
 
+      console.log("Response:", res.data);
+
+      // IMPORTANT
       setScanId(res.data.scan_id);
+
     } catch (err) {
-      console.error(err);
+      console.error("Scan error:", err);
     }
   };
 
   return (
     <div>
       <h2>Start Scan</h2>
+
       <input
         type="text"
         placeholder="Enter URL"
         value={target}
         onChange={(e) => setTarget(e.target.value)}
       />
-      <button onClick={handleSubmit}>Scan</button>
+
+      <button onClick={handleSubmit}>
+        Start Scan
+      </button>
     </div>
   );
 };

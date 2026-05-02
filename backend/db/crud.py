@@ -2,7 +2,8 @@ import logging
 from datetime import datetime
 from sqlalchemy.orm import Session
 from sqlalchemy import func
-from backend.db.models import Scan, Vulnerability
+from db.models import Scan, Vulnerability
+from db import models
 
 logger = logging.getLogger(__name__)
 
@@ -16,12 +17,10 @@ def create_scan(db: Session, target: str, scan_type: str = "web") -> Scan:
 def get_scan_by_id(db: Session, scan_id: str):
     return db.query(Scan).filter(Scan.id == scan_id).first()
 
-def update_scan_status(db: Session, scan_id: str, status: str):
-    scan = get_scan_by_id(db, scan_id)
+def update_scan_status(db, scan_id: str, status: str):
+    scan = db.query(models.Scan).filter(models.Scan.id == scan_id).first()
     if scan:
         scan.status = status
-        if status in ("completed", "failed"):
-            scan.completed_at = datetime.utcnow()
         db.commit()
         db.refresh(scan)
     return scan

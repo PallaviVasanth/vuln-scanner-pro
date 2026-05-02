@@ -5,19 +5,30 @@ const ScanStatus = ({ scanId }) => {
   const [status, setStatus] = useState(null);
 
   useEffect(() => {
-    if (!scanId) return;
+  if (!scanId) return;
 
-    const interval = setInterval(async () => {
+  const interval = setInterval(async () => {
+    try {
       const res = await getStatus(scanId);
+
+if (!res || !res.data) {
+  clearInterval(interval);
+  return;
+}
       setStatus(res.data);
 
       if (res.data.status === "completed") {
         clearInterval(interval);
       }
-    }, 2000);
 
-    return () => clearInterval(interval);
-  }, [scanId]);
+    } catch (error) {
+      console.error("Polling stopped due to error:", error.message);
+      clearInterval(interval); // 🔥 THIS STOPS LOOP
+    }
+  }, 2000);
+
+  return () => clearInterval(interval);
+}, [scanId]);
 
   if (!status) return null;
 

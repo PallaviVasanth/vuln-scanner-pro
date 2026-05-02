@@ -7,8 +7,13 @@ class SQLInjectionScanner(BaseScanner):
     def __init__(self, target: str):
         super().__init__(target)
         self.client = HTTPClient()
-        self.payloads = PayloadLoader.load_payloads("scanner/payloads/sqli_payloads.txt")
+        import os
 
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        payload_path = os.path.join(BASE_DIR, "payloads", "sqli_payloads.txt")
+
+        self.payloads = PayloadLoader.load_payloads(payload_path)
+    
     def scan(self) -> List[Dict]:
         findings = []
 
@@ -20,6 +25,8 @@ class SQLInjectionScanner(BaseScanner):
             # simple heuristic detection
             if "sql" in response["text"].lower() or response["status_code"] == 500:
                 findings.append({
+                    "scanner": "Web Scanner",
+                    "stage": "Web Vulnerability Scan",
                     "type": "SQL Injection",
                     "endpoint": self.target,
                     "payload": payload,

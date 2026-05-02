@@ -3,9 +3,9 @@ import logging
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
-from backend.db.database import get_db
-from backend.db import crud
-from backend.config import settings
+from db.database import get_db
+from db import crud
+from config import settings
 
 logger = logging.getLogger(__name__)
 router = APIRouter()

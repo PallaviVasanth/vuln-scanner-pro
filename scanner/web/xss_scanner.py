@@ -7,8 +7,11 @@ class XSSScanner(BaseScanner):
     def __init__(self, target: str):
         super().__init__(target)
         self.client = HTTPClient()
-        self.payloads = PayloadLoader.load_payloads("scanner/payloads/xss_payloads.txt")
+        import os
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        payload_path = os.path.join(BASE_DIR, "payloads", "xss_payloads.txt")
 
+        self.payloads = PayloadLoader.load_payloads(payload_path)
     def scan(self) -> List[Dict]:
         findings = []
 
@@ -19,6 +22,8 @@ class XSSScanner(BaseScanner):
 
             if payload in response["text"]:
                 findings.append({
+                    "scanner": "Web Scanner",
+                    "stage": "Web Vulnerability Scan",
                     "type": "XSS",
                     "endpoint": self.target,
                     "payload": payload,

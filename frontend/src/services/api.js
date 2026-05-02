@@ -1,19 +1,20 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:8000/api/v1",
+  baseURL: "http://localhost:8000",
 });
 
 // Start scan
-export const startScan = (data) => API.post("/scan/start", data);
+export const startScan = (data) =>
+  API.post("/scan/start", data);  // ✅ KEEP THIS
 
-// Get scan status
+// Status
 export const getStatus = (scanId) =>
-  API.get(`/scan/${scanId}/status`);
+  API.get(`/scan/status/${scanId}`); // ✅ FIXED
 
-// Get results
+// Results
 export const getResults = (scanId) =>
-  API.get(`/scan/${scanId}/results`);
+  API.get(`/scan/result/${scanId}`); // ✅ FIXED
 
 // Get report
 export const getReport = (scanId) =>

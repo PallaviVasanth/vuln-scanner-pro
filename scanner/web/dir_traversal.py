@@ -7,8 +7,13 @@ class DirectoryTraversalScanner(BaseScanner):
     def __init__(self, target: str):
         super().__init__(target)
         self.client = HTTPClient()
-        self.payloads = PayloadLoader.load_payloads("scanner/payloads/traversal_payloads.txt")
+        import os
 
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        payload_path = os.path.join(BASE_DIR, "payloads", "traversal_payloads.txt")
+
+        self.payloads = PayloadLoader.load_payloads(payload_path)
+    
     def scan(self) -> List[Dict]:
         findings = []
 
@@ -19,6 +24,8 @@ class DirectoryTraversalScanner(BaseScanner):
 
             if "root:" in response["text"] or "etc/passwd" in response["text"]:
                 findings.append({
+                    "scanner": "Web Scanner",
+                    "stage": "Web Vulnerability Scan",
                     "type": "Directory Traversal",
                     "endpoint": self.target,
                     "payload": payload,

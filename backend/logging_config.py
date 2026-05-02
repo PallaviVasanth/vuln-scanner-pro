@@ -1,7 +1,7 @@
 import logging
 import sys
 import os
-from backend.config import settings
+from config import settings
 
 def setup_logging():
     log_level = getattr(logging, settings.LOG_LEVEL.upper(), logging.INFO)

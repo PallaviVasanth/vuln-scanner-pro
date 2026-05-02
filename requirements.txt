@@ -1,4 +1,3 @@
-# ── API (Common: Dev1 + Dev2) ─────────────────────────────────────────
 fastapi==0.111.0
 uvicorn==0.30.1          # Dev2 (latest, replaces Dev1 0.29.0)
 
@@ -24,27 +23,29 @@ httpx==0.27.0              # API testing + async support
 # ── Utilities (Common) ────────────────────────────────────────────────
 python-dotenv==1.0.1
 
-# ── Core HTTP + Parsing (Dev1) ────────────────────────────────────────
+# Core HTTP + parsing
 requests==2.31.0
 beautifulsoup4==4.12.3
 
-# ── Network Scanning (Dev1) ───────────────────────────────────────────
+# Network scanning
 python-nmap==0.7.1
 
-# ── SSL / Security (Dev1) ─────────────────────────────────────────────
+# SSL / security (standard lib used, but keep for compatibility)
 pyOpenSSL==24.0.0
+
+# Logging
+loguru==0.7.2
+
+# Type hints / dev support 
+urllib3==1.26.18
 
 # ── Reporting (Common, Dev2 version preferred) ────────────────────────
 reportlab==4.2.0
 
-# ── Logging (Dev1) ───────────────────────────────────────────────────
-loguru==0.7.2
-
 # ── Type Hints / Dev Support (Dev2 preferred) ─────────────────────────
 typing-extensions>=4.14.1
 
-# ── Networking Compatibility (Dev1) ───────────────────────────────────
-urllib3==1.26.18
 
 # ── Async Core (Stability for FastAPI ecosystem) ──────────────────────
 anyio==4.4.0              # prevents async-related compatibility issues
+

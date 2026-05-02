@@ -1,15 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.routes.scan_routes import router as scan_router
-from backend.routes.result_routes import router as result_router
-from backend.routes.report_routes import router as report_router
+from routes.scan_routes import router as scan_router
+from routes.result_routes import router as result_router
+from routes.report_routes import router as report_router
 
-from backend.db.database import engine, SessionLocal
-from backend.db import models
-from backend.db.crud import get_dashboard_summary
+from db.database import engine, SessionLocal
+from db import models
+from db.crud import get_dashboard_summary
 
-from backend.logging_config import setup_logging
+from logging_config import setup_logging
 
 setup_logging()
 models.Base.metadata.create_all(bind=engine)
@@ -22,7 +22,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # allow frontend
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -39,5 +39,13 @@ def dashboard_summary():
         return get_dashboard_summary(db)
     finally:
         db.close()
-
+        
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True
+    )
 # This file is responsible for application entry point, used for initializing FastAPI app with all routers and middleware, and contains app setup, CORS config, router registration, and DB table creation.
