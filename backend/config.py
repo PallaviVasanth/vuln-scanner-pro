@@ -4,7 +4,7 @@ from typing import Optional
 class Settings(BaseSettings):
     APP_NAME: str = "Automated Vulnerability Scanner"
     DEBUG: bool = False
-    DATABASE_URL: str = "postgresql://vuln_user:secure123@localhost:5432/vuln_scanner"
+    DATABASE_URL: str
     SECRET_KEY: str = "supersecretkey"
     MAX_SCAN_TIMEOUT: int = 300
     REPORT_OUTPUT_DIR: str = "reports"

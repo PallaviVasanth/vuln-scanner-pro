@@ -1,13 +1,18 @@
-import React from "react";
-import { getReport } from "../services/api";
-
 const ReportDownload = ({ scanId }) => {
-  const handleDownload = async () => {
-    const res = await getReport(scanId);
-    window.open(res.data.report_url, "_blank");
+  const handleDownload = () => {
+    if (!scanId) {
+      alert("No scan ID available");
+      return;
+    }
+
+    window.open(`http://localhost:8000/report/download/${scanId}`, "_blank");
   };
 
-  return <button onClick={handleDownload}>Download Report</button>;
+  return (
+    <button onClick={handleDownload}>
+      Download Report
+    </button>
+  );
 };
 
 export default ReportDownload;

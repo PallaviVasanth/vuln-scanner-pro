@@ -1,44 +1,59 @@
-import nmap
+import socket
 from typing import List, Dict
 
 class PortScanner:
     def __init__(self, target: str):
-        self.target = target
-        self.scanner = nmap.PortScanner(
-            nmap_search_path=(
-                "C:\\Program Files (x86)\\Nmap\\nmap.exe",
-                "C:\\Program Files\\Nmap\\nmap.exe"
-    )
-)
+        self.target = target.replace("http://", "").replace("https://", "")
 
     def scan(self) -> List[Dict]:
         findings = []
+        ports = [21, 22, 80, 443, 3306]
 
-        try:
-            # Scan common ports
-            self.scanner.scan(self.target, arguments="-F")
+        for port in ports:
+            try:
+                sock = socket.socket()
+                sock.settimeout(1)
+                result = sock.connect_ex((self.target, port))
+                sock.close()
 
-            for host in self.scanner.all_hosts():
-                for proto in self.scanner[host].all_protocols():
-                    ports = self.scanner[host][proto].keys()
+                if result == 0:
+                    findings.append({
+                        "scanner": "Network Scanner",
+                        "stage": "Port Scanning",
+                        "type": "Open Port",
+                        "severity": "medium",
+                        "confidence": 0.9,
+                        "prediction": "Port Exposure",
+                        "is_vulnerable": True,
+                        "endpoint": self.target,
+                        "method": f"Port {port}",
+                        "payload": "N/A",
+                        "status_code": 0,
+                        "response_time": 0,
+                        "error_detected": False,       # ← added
+                        "payload_reflected": False,    # ← added
+                        "evidence": f"Port {port} is open"
+                    })
+            except:
+                continue
 
-                    for port in ports:
-                        state = self.scanner[host][proto][port]['state']
-
-                        if state == "open":
-                            findings.append({
-                                "type": "Open Port",
-                                "endpoint": f"{self.target}:{port}",
-                                "payload": "N/A",
-                                "method": "TCP",
-                                "evidence": f"Port {port} is open",
-                                "status_code": 0,
-                                "response_time": 0,
-                                "error_detected": False,
-                                "payload_reflected": False
-                            })
-
-        except Exception as e:
-            print("Nmap scan failed:", e)
+        if not findings:
+            findings.append({
+                "scanner": "Network Scanner",
+                "stage": "Port Scanning",
+                "type": "Port Scan",
+                "severity": "info",
+                "confidence": 1.0,
+                "prediction": "Safe",
+                "is_vulnerable": False,
+                "endpoint": self.target,
+                "method": "Port Scan",
+                "payload": "N/A",
+                "status_code": 0,
+                "response_time": 0,
+                "error_detected": False,
+                "payload_reflected": False,
+                "evidence": "No open ports detected"
+            })
 
         return findings
