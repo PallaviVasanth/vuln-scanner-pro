@@ -18,3 +18,23 @@ httpx==0.27.0          # for testing FastAPI endpoints
 
 # Utilities
 python-dotenv==1.0.1
+
+# Core HTTP + parsing
+requests==2.31.0
+beautifulsoup4==4.12.3
+
+# Network scanning
+python-nmap==0.7.1
+
+# SSL / security (standard lib used, but keep for compatibility)
+pyOpenSSL==24.0.0
+
+# Reporting
+reportlab==4.0.9
+
+# Logging
+loguru==0.7.2
+
+# Type hints / dev support (optional but good practice)
+typing-extensions==4.11.0
+urllib3==1.26.18
