@@ -12,37 +12,28 @@ router = APIRouter()
 def get_result(scan_id: str, db: Session = Depends(get_db)):
     try:
         scan = crud.get_scan_by_id(db, scan_id)
-
         if not scan:
             return {"status": "not_found", "vulnerabilities": []}
 
         vulnerabilities = crud.get_vulnerabilities_by_scan(db, scan_id)
 
         vuln_list = [
-    {
-        "scanner": v.scanner, 
-        "type": v.name,
-        "severity": v.severity,
-        "confidence": v.confidence,
-        "prediction": v.prediction,
-        "is_vulnerable": v.is_vulnerable,
-        "endpoint": v.endpoint,
-        "method": v.method,
-        "payload": v.payload,
-        "status_code": v.status_code,
-        "response_time": v.response_time,
-        "evidence": v.evidence
-    }
-    for v in vulnerabilities
-]
+            {
+                "type":           v.name,
+                "severity":       v.severity,
+                "description":    v.description,
+                "evidence":       v.evidence,
+                "recommendation": v.recommendation,
+                "cvss_score":     v.cvss_score,
+            }
+            for v in vulnerabilities
+        ]
 
         return {
             "status": scan.status,
             "vulnerabilities": vuln_list
         }
-
     except Exception as e:
         print("ERROR in result API:", str(e))
         return {"status": "error", "vulnerabilities": []}
-
 # This file is responsible for scan result retrieval routes, used for handling GET /scan/result/{scan_id} endpoint, and contains get_scan_result handler that fetches vulnerabilities and risk summary from the database.

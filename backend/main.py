@@ -39,5 +39,13 @@ def dashboard_summary():
         return get_dashboard_summary(db)
     finally:
         db.close()
-
+        
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True
+    )
 # This file is responsible for application entry point, used for initializing FastAPI app with all routers and middleware, and contains app setup, CORS config, router registration, and DB table creation.

@@ -10,8 +10,7 @@ from scanner.web.header_checker import HeaderChecker
 from scanner.network.port_scanner import PortScanner
 from scanner.network.ssl_checker import SSLChecker
 
-
-ML_API_URL = "http://localhost:8001//ml/predict"
+ML_API_URL = "http://localhost:8001/ml/predict"
 
 
 class ScannerManager:

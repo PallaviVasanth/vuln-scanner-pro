@@ -43,12 +43,17 @@ def _run_scan(scan_id: str, target: str, scan_type: str):
             final_findings.append(merged)
 
         for finding in final_findings:
-            # remove scanner before saving to DB
-            finding_copy = finding.copy()
-            finding_copy.pop("scanner", None)
-
-            crud.create_vulnerability(db, scan_id=scan_id, **finding_copy)
-        
+    # Only pass exact fields crud.create_vulnerability() accepts
+            crud.create_vulnerability(
+                db,
+                scan_id=scan_id,
+                name=str(finding.get("name", "Unknown")),
+                description=str(finding.get("description", "")),
+                severity=str(finding.get("severity", "low")),
+                evidence=str(finding.get("evidence", "")),
+                recommendation=str(finding.get("recommendation", "")),
+                cvss_score=float(finding.get("cvss_score", 0.0)),
+    )
         generate_report_for_scan(scan_id, db)
 
         crud.update_scan_status(db, scan_id, "completed")
