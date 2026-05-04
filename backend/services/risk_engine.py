@@ -26,7 +26,7 @@ VULN_SEVERITY_DEFAULTS = {
 def compute_risk_scores(findings: list) -> list:
     scored = []
     for finding in findings:
-        name = finding.get("name", "Unknown")
+        name = finding.get("name") or finding.get("type") or "Unknown Vulnerability"
         severity = finding.get("severity") or VULN_SEVERITY_DEFAULTS.get(name, "low")
         severity = severity.lower()
         cvss_score = SEVERITY_SCORE_MAP.get(severity, 2.0)
