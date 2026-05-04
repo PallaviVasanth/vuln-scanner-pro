@@ -25,6 +25,8 @@ def get_result(scan_id: str, db: Session = Depends(get_db)):
                 "evidence":       v.evidence,
                 "recommendation": v.recommendation,
                 "cvss_score":     v.cvss_score,
+                "ml_prediction":  v.ml_prediction,
+                "ml_confidence":  round(v.ml_confidence * 100, 1),
             }
             for v in vulnerabilities
         ]
