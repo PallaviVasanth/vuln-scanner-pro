@@ -22,6 +22,22 @@ def start_scan_task(scan_id: str, target: str, scan_type: str):
     thread.start()
     logger.info(f"Scan thread started for scan_id={scan_id}")
 
+def _get_recommendation(vuln_type: str) -> str:
+    recommendations = {
+        "Security Misconfiguration": "Add missing security headers to your web server configuration.",
+        "Open Port": "Close unnecessary open ports and restrict access with firewall rules.",
+        "Port Scan": "Ensure firewall rules are properly configured.",
+        "SQL Injection": "Use parameterized queries and input validation.",
+        "Cross-Site Scripting (XSS)": "Sanitize user input and implement Content Security Policy.",
+        "CSRF Vulnerability": "Implement CSRF tokens on all state-changing requests.",
+        "Open Redirect": "Validate and whitelist redirect URLs.",
+        "Directory Traversal": "Sanitize file path inputs and restrict directory access.",
+    }
+    for key in recommendations:
+        if key.lower() in vuln_type.lower():
+            return recommendations[key]
+    return "Review and remediate this vulnerability following security best practices."
+
 def _run_scan(scan_id: str, target: str, scan_type: str):
     db = SessionLocal()
     try:
@@ -43,17 +59,33 @@ def _run_scan(scan_id: str, target: str, scan_type: str):
             final_findings.append(merged)
 
         for finding in final_findings:
-    # Only pass exact fields crud.create_vulnerability() accepts
+    # Map scanner's 'type' field to 'name' since scanner doesn't set 'name'
+            vuln_name = (
+                finding.get("name")
+                or finding.get("type")
+                or "Unknown Vulnerability"
+            )
+
+    # Build description from available fields
+            description = finding.get("description") or (
+                f"{vuln_name} detected at {finding.get('endpoint', 'unknown endpoint')}"
+            )
+
+    # Build recommendation from vuln type
+            recommendation = finding.get("recommendation") or _get_recommendation(vuln_name)
+
             crud.create_vulnerability(
                 db,
                 scan_id=scan_id,
-                name=str(finding.get("name", "Unknown")),
-                description=str(finding.get("description", "")),
+                name=str(vuln_name),
+                description=str(description),
                 severity=str(finding.get("severity", "low")),
                 evidence=str(finding.get("evidence", "")),
-                recommendation=str(finding.get("recommendation", "")),
+                recommendation=str(recommendation),
                 cvss_score=float(finding.get("cvss_score", 0.0)),
-    )
+                ml_prediction=str(finding.get("prediction", "Unknown")),
+                ml_confidence=float(finding.get("confidence", 0.0)),
+            )
         generate_report_for_scan(scan_id, db)
 
         crud.update_scan_status(db, scan_id, "completed")

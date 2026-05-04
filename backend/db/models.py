@@ -29,6 +29,8 @@ class Vulnerability(Base):
     evidence = Column(Text, default="")
     recommendation = Column(Text, default="")
     cvss_score = Column(Float, default=0.0)
+    ml_prediction = Column(String, default="Unknown")   
+    ml_confidence = Column(Float, default=0.0)          
     created_at = Column(DateTime, default=datetime.utcnow)
     scan = relationship("Scan", back_populates="vulnerabilities")
 

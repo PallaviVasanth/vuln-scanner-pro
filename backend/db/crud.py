@@ -26,7 +26,10 @@ def update_scan_status(db, scan_id: str, status: str):
     return scan
 
 def create_vulnerability(db: Session, scan_id: str, name: str, description: str,
-                          severity: str, evidence: str, recommendation: str, cvss_score: float):
+                          severity: str, evidence: str, recommendation: str, 
+                          cvss_score: float,
+                          ml_prediction: str = "Unknown",
+                          ml_confidence: float = 0.0):
     vuln = Vulnerability(
         scan_id=scan_id,
         name=name,
@@ -35,6 +38,8 @@ def create_vulnerability(db: Session, scan_id: str, name: str, description: str,
         evidence=evidence,
         recommendation=recommendation,
         cvss_score=cvss_score,
+        ml_prediction=ml_prediction,
+        ml_confidence=ml_confidence,
     )
     db.add(vuln)
     db.commit()
