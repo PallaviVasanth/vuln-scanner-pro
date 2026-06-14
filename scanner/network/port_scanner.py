@@ -30,8 +30,8 @@ class PortScanner:
                         "payload": "N/A",
                         "status_code": 0,
                         "response_time": 0,
-                        "error_detected": False,       # ← added
-                        "payload_reflected": False,    # ← added
+                        "error_detected": False,       
+                        "payload_reflected": False,    
                         "evidence": f"Port {port} is open"
                     })
             except:

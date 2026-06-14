@@ -17,3 +17,4 @@ def generate_html_report(scan_id: str, findings: List[Dict]) -> str:
         """
 
     return html
+# this file is responsible for simple report generation

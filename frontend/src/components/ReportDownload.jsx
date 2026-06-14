@@ -16,3 +16,5 @@ const ReportDownload = ({ scanId }) => {
 };
 
 export default ReportDownload;
+
+// this file has report download ui

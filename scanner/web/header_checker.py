@@ -37,3 +37,5 @@ class HeaderChecker(BaseScanner):
                 })
 
         return findings
+    
+# this file is responsible for header

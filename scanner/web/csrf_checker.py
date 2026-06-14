@@ -36,3 +36,5 @@ class CSRFChecker(BaseScanner):
                 })
 
         return findings
+    
+# this file is responsible for csrf

@@ -26,4 +26,4 @@ def setup_logging():
         root_logger.addHandler(console_handler)
         root_logger.addHandler(file_handler)  # ✅ ADD THIS
 
-# This file is responsible for logging configuration, used for setting up a consistent stdout logging format across all modules, and contains setup_logging function with formatter and stream handler initialization.
+# This above file is responsible for logging configuration, used for setting up a consistent stdout logging format across all modules, and contains setup_logging function with formatter and stream handler initialization.

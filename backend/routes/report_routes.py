@@ -1,3 +1,4 @@
+# This file is responsible for report download routes, used for handling GET /report/download/{scan_id} endpoint, and contains download_report handler that serves generated PDF reports or triggers on-demand generation.
 import os
 import logging
 from fastapi import APIRouter, Depends, HTTPException
@@ -29,5 +30,3 @@ def download_report(scan_id: str, db: Session = Depends(get_db)):
         media_type="application/pdf",
         filename=f"vulnerability_report_{scan_id}.pdf"
     )
-
-# This file is responsible for report download routes, used for handling GET /report/download/{scan_id} endpoint, and contains download_report handler that serves generated PDF reports or triggers on-demand generation.

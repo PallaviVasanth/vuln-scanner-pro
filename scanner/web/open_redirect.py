@@ -35,3 +35,5 @@ class OpenRedirectScanner(BaseScanner):
                 })
 
         return findings
+    
+# this file is responsible for redirect

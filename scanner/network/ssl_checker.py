@@ -29,7 +29,7 @@ class SSLChecker:
                             "payload_reflected": False
                         })
 
-                    # Basic validation
+                    # Basic validation done
                     if not cert:
                         findings.append({
                             "scanner": "Network Scanner",

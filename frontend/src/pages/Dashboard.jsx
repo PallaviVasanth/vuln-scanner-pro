@@ -8,7 +8,7 @@ import { getResults } from "../services/api";
 const Dashboard = () => {
   const [scanId, setScanId] = useState(null);
   const [results, setResults] = useState(null);
-  const intervalRef = useRef(null);   // ← stable ref, no closure issue
+  const intervalRef = useRef(null);   //  stable ref, no closure issue
 
   useEffect(() => {
     if (!scanId) return;
@@ -19,7 +19,7 @@ const Dashboard = () => {
         setResults(res.data.vulnerabilities);
 
         if (res.data.status === "completed" || res.data.status === "failed") {
-          clearInterval(intervalRef.current);  // ← always defined
+          clearInterval(intervalRef.current);  // always defined
           intervalRef.current = null;
         }
       } catch (err) {

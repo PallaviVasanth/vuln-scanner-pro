@@ -16,3 +16,5 @@ class FormExtractor:
         forms = soup.find_all("form")
 
         return forms
+    
+# this file is responsible for extraction of forms

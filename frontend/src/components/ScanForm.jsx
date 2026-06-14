@@ -42,3 +42,5 @@ const ScanForm = ({ setScanId }) => {
 };
 
 export default ScanForm;
+
+// this file has form detail 

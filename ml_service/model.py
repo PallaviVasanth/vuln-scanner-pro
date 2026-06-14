@@ -95,17 +95,13 @@ class ThreatModel:
             "is_vulnerable": is_vulnerable,
         }
 
-
-# ─────────────────────────────────────────────
 # Singleton — api.py imports this instance
-# ─────────────────────────────────────────────
+
 
 threat_model = ThreatModel()
 
-
-# ─────────────────────────────────────────────
 # Quick test — run directly to verify
-# ─────────────────────────────────────────────
+
 
 if __name__ == "__main__":
     threat_model.load()

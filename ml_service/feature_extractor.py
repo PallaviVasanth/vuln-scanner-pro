@@ -166,10 +166,8 @@ def get_feature_columns() -> list[str]:
         "is_slow_response",
     ]
 
-
-# ─────────────────────────────────────────────
 # Quick test — run directly to verify
-# ─────────────────────────────────────────────
+
 
 if __name__ == "__main__":
     test_cases = [

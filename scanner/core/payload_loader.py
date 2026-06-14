@@ -8,3 +8,5 @@ class PayloadLoader:
         """
         with open(file_path, "r", encoding="utf-8") as f:
             return [line.strip() for line in f if line.strip()]
+        
+# # this file is responsible for loading payload
