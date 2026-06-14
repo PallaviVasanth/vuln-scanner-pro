@@ -66,12 +66,12 @@ def _run_scan(scan_id: str, target: str, scan_type: str):
                 or "Unknown Vulnerability"
             )
 
-    # Build description from available fields
+    # Building description from available fields
             description = finding.get("description") or (
                 f"{vuln_name} detected at {finding.get('endpoint', 'unknown endpoint')}"
             )
 
-    # Build recommendation from vuln type
+    # Building recommendation from vuln type
             recommendation = finding.get("recommendation") or _get_recommendation(vuln_name)
 
             crud.create_vulnerability(

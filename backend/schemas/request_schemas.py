@@ -21,4 +21,4 @@ class ScanRequest(BaseModel):
             raise ValueError(f"scan_type must be one of {allowed}")
         return v
 
-# This file is responsible for incoming request schema definitions, used for validating and parsing API request payloads using Pydantic, and contains ScanRequest model with target and scan_type fields and their validators.
+# The file is responsible for incoming request schema definitions, used for validating and parsing API request payloads using Pydantic, and contains ScanRequest model with target and scan_type fields and their validators.

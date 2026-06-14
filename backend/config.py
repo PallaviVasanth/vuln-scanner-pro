@@ -17,4 +17,4 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
-# This file is responsible for application configuration management, used for centralizing all environment-based settings via Pydantic BaseSettings, and contains database URL, app metadata, ML model path, scan limits, and log level.
+# This file is responsible for application configuration management, used for centralizing all environment based settings via Pydantic BaseSettings, and contains database URL, app metadata, ML model path, scan limits, and log level.

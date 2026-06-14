@@ -48,4 +48,4 @@ if __name__ == "__main__":
         port=8000,
         reload=True
     )
-# This file is responsible for application entry point, used for initializing FastAPI app with all routers and middleware, and contains app setup, CORS config, router registration, and DB table creation.
+# This file is responsible for application entry point, used to initializing FastAPI app with all routers and middleware, and contains app setup, CORS config, router registration, and DB table creation.

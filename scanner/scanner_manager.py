@@ -54,7 +54,7 @@ class ScannerManager:
                 print(f"[Web] {scanner.__class__.__name__} failed: {e}")
 
 
-        # ---- Run Network Scanners ----
+        # ---- Runs Network Scanners ----
         for scanner in network_scanners:
             try:
                 results = scanner.scan()

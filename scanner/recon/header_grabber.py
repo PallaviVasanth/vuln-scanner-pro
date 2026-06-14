@@ -15,3 +15,5 @@ class HeaderGrabber:
             "headers": response.get("headers", {}),
             "status_code": response["status_code"]
         }
+    
+# this file is responsible to fetch headers from target

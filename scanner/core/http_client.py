@@ -38,3 +38,4 @@ class HTTPClient:
                 "response_time": 0,
                 "error": True
             }
+# this file is responsible for sending http request

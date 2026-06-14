@@ -12,7 +12,7 @@ export const startScan = (data) =>
 export const getStatus = (scanId) =>
   API.get(`/scan/status/${scanId}`); // ✅ FIXED
 
-// Results
+// Result
 export const getResults = (scanId) =>
   API.get(`/scan/result/${scanId}`); // ✅ FIXED
 

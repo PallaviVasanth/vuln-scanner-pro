@@ -133,7 +133,7 @@ def main():
     # Load
     df = load_dataset(DATASET_PATH)
 
-    # Features
+    # Feature
     X = build_feature_matrix(df)
 
     # Encode labels  (Clean=0, CSRF=1, Open Redirect=2, SQLi=3, XSS=4)

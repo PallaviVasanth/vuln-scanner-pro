@@ -43,7 +43,7 @@ class ServiceAnalyzer:
             except Exception:
                 continue
 
-        # If nothing found
+        # If nothing is found
         if not findings:
             findings.append({
                 "scanner": "Network Scanner",

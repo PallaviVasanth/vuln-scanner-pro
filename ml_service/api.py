@@ -133,10 +133,7 @@ def predict(request: PredictRequest):
             }
         )
 
-
-# ─────────────────────────────────────────────
 # Entry point
-# ─────────────────────────────────────────────
 
 if __name__ == "__main__":
     uvicorn.run(

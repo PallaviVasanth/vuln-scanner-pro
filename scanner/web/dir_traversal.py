@@ -38,3 +38,5 @@ class DirectoryTraversalScanner(BaseScanner):
                 })
 
         return findings
+    
+# this file is responsible for dir traversal

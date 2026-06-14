@@ -26,3 +26,5 @@ const SeverityChart = ({ data }) => {
 };
 
 export default SeverityChart;
+
+// this file has sevierity

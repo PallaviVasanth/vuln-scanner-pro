@@ -23,7 +23,7 @@ if (!res || !res.data) {
 
     } catch (error) {
       console.error("Polling stopped due to error:", error.message);
-      clearInterval(interval); // 🔥 THIS STOPS LOOP
+      clearInterval(interval); //  THIS STOPS LOOP
     }
   }, 2000);
 
